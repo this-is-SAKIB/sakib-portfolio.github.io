@@ -1,0 +1,2660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Sakibul Hasan — SEO Architect & Digital Strategist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #050810;
+  --surface: #0b1120;
+  --accent: #00e5ff;
+  --accent2: #ff3d6b;
+  --accent3: #9b59ff;
+  --text: #e8eaf6;
+  --muted: #8892b0;
+  --border: rgba(0,229,255,0.12);
+  --glow: rgba(0,229,255,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor {
+  width: 16px; height: 16px;
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 9999; transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s, border-color .2s;
+  mix-blend-mode: difference;
+}
+#cursor-trail {
+  width: 40px; height: 40px;
+  border: 1px solid rgba(0,229,255,.3);
+  border-radius: 50%;
+  position: fixed; pointer-events: none;
+  z-index: 9998; transform: translate(-50%,-50%);
+  transition: left .12s ease-out, top .12s ease-out;
+}
+body:hover #cursor { background: rgba(0,229,255,.15); }
+a:hover ~ #cursor, button:hover ~ #cursor { width: 32px; height: 32px; }
+
+/* ── CANVAS PARTICLES ── */
+#particles-canvas {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+/* ── SCROLL PROGRESS ── */
+#scroll-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent3), var(--accent2));
+  z-index: 1000; width: 0%; transition: width .1s;
+  box-shadow: 0 0 12px var(--glow);
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; width: 100%;
+  padding: 1.2rem 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  z-index: 100;
+  backdrop-filter: blur(20px);
+  background: rgba(5,8,16,.7);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 1.1rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent2); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; }
+.nav-links a {
+  color: var(--muted); text-decoration: none;
+  font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+  transition: color .3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -3px; left: 0;
+  width: 0; height: 1px; background: var(--accent);
+  transition: width .3s;
+}
+.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { width: 100%; }
+.nav-badge {
+  font-size: .65rem; padding: .3rem .8rem;
+  border: 1px solid var(--accent); color: var(--accent);
+  border-radius: 100px; letter-spacing: .1em;
+  animation: pulse-border 2s infinite;
+}
+@keyframes pulse-border {
+  0%,100% { box-shadow: 0 0 0 0 var(--glow); }
+  50% { box-shadow: 0 0 0 6px transparent; }
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 6rem 3rem 3rem;
+  position: relative; z-index: 1;
+}
+.hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
+.hero-tag {
+  font-size: .7rem; letter-spacing: .25em; color: var(--accent);
+  text-transform: uppercase; margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.hero-tag::before {
+  content: ''; width: 32px; height: 1px; background: var(--accent);
+}
+.hero-headline {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(3.5rem, 9vw, 8rem);
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+.hero-headline .line { display: block; overflow: hidden; }
+.hero-headline .line span {
+  display: block;
+  transform: translateY(110%);
+  animation: slide-up .9s cubic-bezier(.16,1,.3,1) forwards;
+}
+.hero-headline .line:nth-child(1) span { animation-delay: .1s; }
+.hero-headline .line:nth-child(2) span { animation-delay: .25s; }
+.hero-headline .line:nth-child(3) span { animation-delay: .4s; color: var(--accent); font-style: italic; }
+@keyframes slide-up {
+  to { transform: translateY(0); }
+}
+.hero-sub {
+  max-width: 600px;
+  color: var(--muted); line-height: 1.8;
+  font-size: .85rem;
+  opacity: 0;
+  animation: fade-in .8s .8s forwards;
+  margin-bottom: 2.5rem;
+}
+@keyframes fade-in { to { opacity: 1; } }
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  margin-bottom: 3rem;
+  opacity: 0;
+  animation: fade-in .8s 1s forwards;
+}
+.stat-item { display: flex; flex-direction: column; }
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 2.5rem; font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+.stat-num .accent { color: var(--accent); }
+.stat-label { font-size: .65rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; margin-top: .3rem; }
+.hero-cta {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  opacity: 0;
+  animation: fade-in .8s 1.2s forwards;
+}
+.btn-primary {
+  padding: .9rem 2.2rem;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+  text-decoration: none; border: none;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  cursor: none;
+  transition: all .3s;
+}
+.btn-primary:hover { background: var(--accent3); box-shadow: 0 0 30px rgba(155,89,255,.5); }
+.btn-outline {
+  padding: .9rem 2.2rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: .75rem; letter-spacing: .15em; text-transform: uppercase;
+  text-decoration: none; background: transparent;
+  clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  cursor: none;
+  transition: all .3s;
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.hero-scroll-hint {
+  position: absolute; bottom: 2.5rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  color: var(--muted); font-size: .65rem; letter-spacing: .2em; text-transform: uppercase;
+  opacity: 0; animation: fade-in 1s 1.8s forwards;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: scroll-bounce 2s infinite;
+}
+@keyframes scroll-bounce {
+  0%,100% { transform: scaleY(1) translateY(0); }
+  50% { transform: scaleY(1.2) translateY(5px); }
+}
+.hero-glitch {
+  position: absolute; right: 5%;
+  top: 50%; transform: translateY(-50%);
+  width: 320px; height: 320px;
+  opacity: .06;
+  pointer-events: none;
+}
+.hero-ring {
+  width: 100%; height: 100%;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  animation: spin-slow 20s linear infinite;
+}
+.hero-ring-2 {
+  position: absolute; top: 20px; left: 20px;
+  right: 20px; bottom: 20px;
+  border: 1px dashed var(--accent3);
+  border-radius: 50%;
+  animation: spin-slow 15s linear infinite reverse;
+}
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+
+/* ── MARQUEE ── */
+.marquee-section {
+  padding: 1.5rem 0;
+  background: rgba(0,229,255,.05);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  position: relative; z-index: 1;
+}
+.marquee-track {
+  display: flex; gap: 3rem;
+  animation: marquee 30s linear infinite;
+  white-space: nowrap;
+}
+.marquee-track:hover { animation-play-state: paused; }
+@keyframes marquee { to { transform: translateX(-50%); } }
+.marquee-item {
+  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--muted); flex-shrink: 0;
+}
+.marquee-item .dot { color: var(--accent); margin: 0 1rem; }
+
+/* ── SECTION BASE ── */
+section { position: relative; z-index: 1; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 3rem; }
+.section-header {
+  display: flex; align-items: center; gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+.section-tag {
+  font-size: .65rem; color: var(--accent); letter-spacing: .25em;
+  text-transform: uppercase;
+}
+.section-line { flex: 1; height: 1px; background: var(--border); }
+.section-num {
+  font-family: 'Syne', sans-serif;
+  font-size: .75rem; color: var(--muted);
+}
+
+/* ── PHILOSOPHY ── */
+#philosophy { padding: 8rem 0; }
+.phil-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 5rem;
+}
+.phil-card {
+  background: var(--bg);
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  transition: background .4s;
+}
+.phil-card::before {
+  content: attr(data-icon);
+  position: absolute; top: 1.5rem; right: 2rem;
+  font-size: 3rem; opacity: .08;
+  transition: opacity .4s, transform .4s;
+}
+.phil-card:hover { background: rgba(0,229,255,.03); }
+.phil-card:hover::before { opacity: .15; transform: scale(1.2) rotate(-10deg); }
+.phil-card-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 4rem; font-weight: 800;
+  color: rgba(0,229,255,.08);
+  line-height: 1;
+  margin-bottom: .5rem;
+}
+.phil-card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+.phil-card-desc { font-size: .8rem; line-height: 1.8; color: var(--muted); }
+
+/* ── QUOTE BLOCKS ── */
+.quote-block {
+  padding: 4rem 5rem;
+  border-left: 3px solid var(--accent);
+  background: linear-gradient(135deg, rgba(0,229,255,.04), transparent);
+  margin: 3rem 0;
+  position: relative;
+}
+.quote-block::before {
+  content: '"';
+  font-family: 'Fraunces', serif;
+  font-size: 8rem; line-height: 1;
+  color: rgba(0,229,255,.1);
+  position: absolute; top: -1rem; left: 3rem;
+  pointer-events: none;
+}
+.quote-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.6rem; line-height: 1.6;
+  font-style: italic;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+}
+.quote-attr { font-size: .7rem; color: var(--accent); letter-spacing: .15em; text-transform: uppercase; }
+
+/* ── SKILLS ── */
+#skills { padding: 8rem 0; }
+.skills-layout { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: start; }
+.skill-category { margin-bottom: 3rem; }
+.skill-cat-title {
+  font-size: .65rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--accent3); margin-bottom: 1.5rem;
+}
+.skill-bar-wrap { margin-bottom: 1.2rem; }
+.skill-name { font-size: .75rem; color: var(--text); margin-bottom: .4rem; display: flex; justify-content: space-between; }
+.skill-name span { color: var(--muted); font-size: .65rem; }
+.skill-track {
+  height: 2px; background: rgba(255,255,255,.07);
+  position: relative; overflow: visible;
+}
+.skill-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  width: 0;
+  transition: width 1.5s cubic-bezier(.16,1,.3,1);
+  position: relative;
+}
+.skill-fill::after {
+  content: ''; position: absolute;
+  right: -4px; top: -3px;
+  width: 8px; height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--glow);
+}
+.skills-right { }
+.fact-card {
+  border: 1px solid var(--border);
+  padding: 2rem 2.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .3s;
+}
+.fact-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 3px; height: 0;
+  background: linear-gradient(to bottom, var(--accent), var(--accent3));
+  transition: height .4s;
+}
+.fact-card:hover { border-color: rgba(0,229,255,.3); }
+.fact-card:hover::before { height: 100%; }
+.fact-label {
+  font-size: .6rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: .7rem;
+}
+.fact-text { font-size: .85rem; line-height: 1.7; color: var(--text); }
+
+/* ── JOURNEY / TIMELINE ── */
+#journey { padding: 8rem 0; }
+.timeline { position: relative; padding-left: 2rem; }
+.timeline::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent3), transparent);
+}
+.tl-entry {
+  position: relative;
+  padding: 0 0 4rem 3rem;
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity .6s, transform .6s;
+}
+.tl-entry.visible { opacity: 1; transform: translateX(0); }
+.tl-dot {
+  position: absolute; left: -7px; top: 6px;
+  width: 14px; height: 14px;
+  border: 2px solid var(--accent);
+  background: var(--bg);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--glow);
+}
+.tl-date {
+  font-size: .65rem; color: var(--accent); letter-spacing: .2em;
+  text-transform: uppercase; margin-bottom: .7rem;
+}
+.tl-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  margin-bottom: .3rem;
+}
+.tl-org { font-size: .7rem; color: var(--muted); margin-bottom: 1rem; }
+.tl-points { list-style: none; }
+.tl-points li {
+  font-size: .8rem; line-height: 1.8; color: var(--muted);
+  padding-left: 1.2rem; position: relative; margin-bottom: .4rem;
+}
+.tl-points li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--accent);
+}
+
+/* ── METRICS ── */
+#metrics { padding: 6rem 0; }
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.metric-card {
+  background: var(--bg);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: background .3s;
+  position: relative; overflow: hidden;
+}
+.metric-card::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  transform: scaleX(0);
+  transition: transform .4s;
+}
+.metric-card:hover { background: rgba(0,229,255,.04); }
+.metric-card:hover::after { transform: scaleX(1); }
+.metric-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 3rem; font-weight: 800;
+  color: var(--accent);
+  display: block; line-height: 1;
+  margin-bottom: .5rem;
+}
+.metric-label { font-size: .65rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; }
+
+/* ── SEO ARTICLE ── */
+#article { padding: 8rem 0; }
+.article-container {
+  display: grid; grid-template-columns: 2fr 1fr;
+  gap: 5rem;
+}
+.article-content { }
+.article-kicker {
+  font-size: .65rem; letter-spacing: .25em; text-transform: uppercase;
+  color: var(--accent2); margin-bottom: 1rem;
+}
+.article-title {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem; line-height: 1.3;
+  margin-bottom: 2rem;
+}
+.article-body { font-size: .85rem; line-height: 2; color: var(--muted); }
+.article-body p { margin-bottom: 1.5rem; }
+.article-body strong { color: var(--text); }
+.article-sidebar { }
+.sidebar-card {
+  border: 1px solid var(--border);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.sidebar-card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: .75rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1.2rem;
+}
+.sidebar-stat { display: flex; justify-content: space-between; margin-bottom: .8rem; border-bottom: 1px solid var(--border); padding-bottom: .8rem; }
+.sidebar-stat:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.ss-key { font-size: .75rem; color: var(--muted); }
+.ss-val { font-size: .75rem; color: var(--text); }
+.ss-val.green { color: #00ff88; }
+.ss-val.accent { color: var(--accent); }
+
+/* ── INSPIRATION WALL ── */
+#inspiration { padding: 8rem 0; }
+.inspiration-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+}
+.insp-card {
+  background: var(--bg);
+  padding: 3rem 2.5rem;
+  transition: background .3s;
+  position: relative; overflow: hidden;
+}
+.insp-card:hover { background: rgba(155,89,255,.05); }
+.insp-icon { font-size: 1.8rem; margin-bottom: 1.5rem; }
+.insp-quote {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem; line-height: 1.7;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.insp-attr { font-size: .65rem; color: var(--accent); letter-spacing: .1em; }
+
+/* ── LANGUAGES ── */
+#languages-skills { padding: 8rem 0; }
+.lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 4rem; }
+.lang-card {
+  border: 1px solid var(--border);
+  padding: 2rem;
+  text-align: center;
+  transition: all .3s;
+  position: relative; overflow: hidden;
+}
+.lang-card::before {
+  content: '';
+  position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(0,229,255,.06) 0%, transparent 60%);
+  opacity: 0; transition: opacity .4s;
+}
+.lang-card:hover::before { opacity: 1; }
+.lang-card:hover { border-color: rgba(0,229,255,.3); }
+.lang-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  margin-bottom: .5rem;
+}
+.lang-level {
+  font-size: .65rem; color: var(--accent); letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.lang-flags { font-size: 2rem; margin-bottom: 1rem; }
+
+/* ── CONTACT ── */
+#contact { padding: 8rem 0 5rem; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.contact-headline {
+  font-family: 'Fraunces', serif;
+  font-size: 3rem; line-height: 1.2;
+  margin-bottom: 2rem;
+}
+.contact-headline em { color: var(--accent); font-style: italic; }
+.contact-desc { font-size: .85rem; line-height: 1.8; color: var(--muted); margin-bottom: 2rem; }
+.contact-links { display: flex; flex-direction: column; gap: 1rem; }
+.contact-link {
+  display: flex; align-items: center; gap: 1rem;
+  font-size: .8rem; color: var(--text); text-decoration: none;
+  padding: 1rem 1.5rem;
+  border: 1px solid var(--border);
+  transition: all .3s;
+}
+.contact-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,229,255,.05);
+}
+.contact-link-icon { width: 20px; text-align: center; }
+.contact-form-side { }
+.form-note {
+  font-size: .75rem; color: var(--muted); line-height: 1.8;
+  border: 1px solid var(--border);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+.form-note strong { color: var(--text); }
+.avail-badge {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+  color: #00ff88; padding: .6rem 1.2rem;
+  border: 1px solid rgba(0,255,136,.3);
+  background: rgba(0,255,136,.06);
+}
+.avail-dot {
+  width: 6px; height: 6px;
+  background: #00ff88; border-radius: 50%;
+  animation: blink 1.5s infinite;
+}
+@keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: .2; } }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 3rem;
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 1;
+}
+.footer-left { font-size: .7rem; color: var(--muted); }
+.footer-right { font-size: .65rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; }
+
+/* ── REVEAL ANIMATION ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── NOISE OVERLAY ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: .02;
+  pointer-events: none;
+  z-index: 9000;
+}
+
+/* ── GLITCH TEXT ── */
+.glitch { position: relative; }
+.glitch::before, .glitch::after {
+  content: attr(data-text);
+  position: absolute; inset: 0;
+}
+.glitch::before {
+  color: var(--accent2);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  animation: glitch1 3s infinite;
+}
+.glitch::after {
+  color: var(--accent);
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  animation: glitch2 3s infinite;
+}
+@keyframes glitch1 {
+  0%,80%,100% { transform: none; }
+  82% { transform: translateX(-3px); }
+  84% { transform: translateX(3px); }
+  86% { transform: none; }
+}
+@keyframes glitch2 {
+  0%,80%,100% { transform: none; }
+  83% { transform: translateX(3px); }
+  85% { transform: translateX(-3px); }
+  87% { transform: none; }
+}
+
+/* ── COUNTER NUMBERS ── */
+.count-num {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── SERVICES ── */
+#services { padding: 8rem 0; }
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 4rem;
+}
+.service-card {
+  background: var(--bg);
+  padding: 2.8rem 2.2rem;
+  position: relative; overflow: hidden;
+  transition: background .4s;
+  cursor: none;
+}
+.service-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.service-card:hover { background: rgba(0,229,255,.03); }
+.service-card:hover::before { transform: scaleX(1); }
+.service-icon {
+  font-size: 2rem; margin-bottom: 1.5rem;
+  display: block;
+  transition: transform .3s;
+}
+.service-card:hover .service-icon { transform: scale(1.15) rotate(-5deg); }
+.service-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--text); margin-bottom: .8rem;
+}
+.service-desc { font-size: .78rem; line-height: 1.8; color: var(--muted); margin-bottom: 1.2rem; }
+.service-tags { display: flex; flex-wrap: wrap; gap: .4rem; }
+.service-tag {
+  font-size: .6rem; padding: .2rem .7rem;
+  border: 1px solid var(--border); color: var(--muted);
+  letter-spacing: .08em;
+}
+.service-cta-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 2rem 3rem;
+  background: linear-gradient(135deg, rgba(0,229,255,.06), rgba(155,89,255,.04));
+  border: 1px solid var(--border);
+}
+.service-cta-text {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem; font-style: italic;
+}
+.service-cta-btns { display: flex; gap: 1rem; }
+
+/* ── CHECKLISTS ── */
+#checklists { padding: 8rem 0; }
+.checklist-tabs {
+  display: flex; gap: 0;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+.tab-btn {
+  padding: .9rem 1.8rem;
+  background: transparent; border: none;
+  color: var(--muted); font-family: 'DM Mono', monospace;
+  font-size: .7rem; letter-spacing: .12em; text-transform: uppercase;
+  cursor: none; border-right: 1px solid var(--border);
+  transition: all .3s; white-space: nowrap;
+  flex-shrink: 0;
+}
+.tab-btn:last-child { border-right: none; }
+.tab-btn:hover { background: rgba(0,229,255,.05); color: var(--text); }
+.tab-btn.active { background: rgba(0,229,255,.1); color: var(--accent); }
+.checklist-panel { display: none; }
+.checklist-panel.active { display: block; }
+.checklist-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 2.5rem 3rem;
+  border: 1px solid var(--border);
+  border-bottom: none;
+  background: rgba(0,229,255,.02);
+}
+.cl-header-left {}
+.cl-title {
+  font-family: 'Fraunces', serif;
+  font-size: 1.8rem; margin-bottom: .5rem;
+}
+.cl-subtitle { font-size: .75rem; color: var(--muted); }
+.cl-progress-wrap { text-align: right; }
+.cl-progress-label { font-size: .65rem; color: var(--muted); letter-spacing: .15em; text-transform: uppercase; margin-bottom: .5rem; }
+.cl-progress-bar {
+  width: 200px; height: 3px;
+  background: rgba(255,255,255,.07);
+  position: relative; overflow: hidden;
+}
+.cl-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  transition: width .5s;
+}
+.cl-count { font-size: .75rem; color: var(--accent); margin-top: .5rem; }
+.checklist-body {
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.cl-category { border-bottom: 1px solid var(--border); }
+.cl-category:last-child { border-bottom: none; }
+.cl-cat-header {
+  padding: 1.2rem 2rem;
+  background: rgba(155,89,255,.04);
+  display: flex; align-items: center; gap: 1rem;
+  cursor: none;
+}
+.cl-cat-icon { font-size: 1rem; }
+.cl-cat-name {
+  font-size: .75rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent3);
+}
+.cl-cat-count { font-size: .65rem; color: var(--muted); margin-left: auto; }
+.cl-items { padding: .5rem 0; }
+.cl-item {
+  display: flex; align-items: flex-start; gap: 1.2rem;
+  padding: .9rem 2rem .9rem 3.5rem;
+  border-bottom: 1px solid rgba(255,255,255,.03);
+  transition: background .2s;
+  cursor: none;
+}
+.cl-item:last-child { border-bottom: none; }
+.cl-item:hover { background: rgba(0,229,255,.03); }
+.cl-checkbox {
+  width: 16px; height: 16px; flex-shrink: 0;
+  border: 1.5px solid var(--border);
+  border-radius: 3px; margin-top: 2px;
+  cursor: none; appearance: none;
+  -webkit-appearance: none;
+  transition: all .2s; position: relative;
+}
+.cl-checkbox:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.cl-checkbox:checked::after {
+  content: '✓';
+  position: absolute; top: -2px; left: 1px;
+  font-size: .7rem; color: var(--bg);
+}
+.cl-item-content {}
+.cl-item-title { font-size: .8rem; color: var(--text); margin-bottom: .2rem; }
+.cl-item-desc { font-size: .7rem; color: var(--muted); line-height: 1.6; }
+.cl-item-badge {
+  font-size: .55rem; padding: .2rem .5rem;
+  letter-spacing: .08em; text-transform: uppercase;
+  flex-shrink: 0; margin-top: 3px; height: fit-content;
+  border: 1px solid;
+}
+.badge-critical { border-color: rgba(255,61,107,.4); color: var(--accent2); background: rgba(255,61,107,.06); }
+.badge-important { border-color: rgba(0,229,255,.4); color: var(--accent); background: rgba(0,229,255,.06); }
+.badge-advanced { border-color: rgba(155,89,255,.4); color: var(--accent3); background: rgba(155,89,255,.06); }
+.badge-boost { border-color: rgba(0,255,136,.4); color: #00ff88; background: rgba(0,255,136,.06); }
+
+/* ── CERTIFICATION CARDS ── */
+.cert-card {
+  display: flex; align-items: center; gap: 1.5rem;
+  border: 1px solid var(--border); padding: 1.5rem 2rem;
+  margin-top: 1rem;
+  position: relative; overflow: hidden;
+  transition: all .3s;
+}
+.cert-card::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--accent), var(--accent3));
+}
+.cert-card:hover { border-color: rgba(0,229,255,.3); background: rgba(0,229,255,.02); }
+.cert-badge-icon { font-size: 2rem; flex-shrink: 0; }
+.cert-info {}
+.cert-title { font-family: 'Syne',sans-serif; font-size: .9rem; font-weight: 700; color: var(--text); margin-bottom: .3rem; }
+.cert-org { font-size: .7rem; color: var(--muted); margin-bottom: .4rem; }
+.cert-level {
+  display: inline-block;
+  font-size: .6rem; padding: .2rem .7rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  border: 1px solid rgba(0,229,255,.3); color: var(--accent);
+  background: rgba(0,229,255,.06);
+}
+.cert-year { font-size: .7rem; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+
+/* ── STEVE JOBS QUOTE SECTION ── */
+#jobs-quote {
+  padding: 8rem 0;
+  position: relative; z-index:1;
+  text-align: center;
+}
+.jobs-quote-inner {
+  max-width: 900px; margin: 0 auto;
+  padding: 5rem 4rem;
+  border: 1px solid var(--border);
+  position: relative;
+  background: linear-gradient(135deg, rgba(0,229,255,.03), rgba(155,89,255,.03));
+}
+.jobs-quote-inner::before {
+  content: '"';
+  font-family: 'Fraunces', serif;
+  font-size: 12rem; line-height: .8;
+  color: rgba(0,229,255,.06);
+  position: absolute; top: 1rem; left: 2rem;
+  pointer-events: none;
+}
+.jobs-quote-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+}
+.jobs-quote-corner.tl { top: -1px; left: -1px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.jobs-quote-corner.tr { top: -1px; right: -1px; border-top: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.jobs-quote-corner.bl { bottom: -1px; left: -1px; border-bottom: 2px solid var(--accent); border-left: 2px solid var(--accent); }
+.jobs-quote-corner.br { bottom: -1px; right: -1px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
+.jobs-quote-text {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  font-style: italic; line-height: 1.5;
+  color: var(--text);
+  margin-bottom: 2.5rem;
+  position: relative; z-index: 1;
+}
+.jobs-quote-attr {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  font-size: .75rem; color: var(--muted); letter-spacing: .2em; text-transform: uppercase;
+}
+.jobs-attr-line { width: 40px; height: 1px; background: var(--accent); }
+.jobs-attr-name { color: var(--accent); }
+
+/* ── BIG CTA SECTION ── */
+#cta-section {
+  padding: 6rem 0;
+  position: relative; z-index: 1;
+  text-align: center;
+}
+.cta-inner {
+  max-width: 800px; margin: 0 auto;
+}
+.cta-headline {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2; margin-bottom: 1.5rem;
+}
+.cta-headline em { color: var(--accent); font-style: italic; }
+.cta-sub { font-size: .85rem; color: var(--muted); line-height: 1.8; margin-bottom: 2.5rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+.cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn-large {
+  padding: 1.1rem 3rem;
+  font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  cursor: none; text-decoration: none; display: inline-block;
+  transition: all .35s;
+}
+.btn-large-primary {
+  background: var(--accent); color: var(--bg);
+}
+.btn-large-primary:hover { background: var(--accent3); box-shadow: 0 0 40px rgba(155,89,255,.5); }
+.btn-large-outline {
+  border: 1px solid var(--border); color: var(--text);
+  background: transparent;
+}
+.btn-large-outline:hover { border-color: var(--accent2); color: var(--accent2); }
+.btn-wa {
+  border: 1px solid rgba(37,211,102,.3) !important;
+  color: #25D366 !important;
+  background: rgba(37,211,102,.06) !important;
+}
+.btn-wa:hover {
+  border-color: #25D366 !important;
+  color: #25D366 !important;
+  box-shadow: 0 0 30px rgba(37,211,102,.3) !important;
+  background: rgba(37,211,102,.1) !important;
+}
+.contact-link.whatsapp:hover {
+  border-color: rgba(37,211,102,.5);
+  color: #25D366;
+  background: rgba(37,211,102,.06);
+}
+.btn-large-ghost {
+  border: 1px solid rgba(155,89,255,.4); color: var(--accent3);
+  background: rgba(155,89,255,.06);
+}
+.btn-large-ghost:hover { border-color: var(--accent3); box-shadow: 0 0 30px rgba(155,89,255,.3); }
+
+/* ── NOTABLE PROJECTS ── */
+#projects { padding: 8rem 0; }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5px; background: var(--border);
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+}
+.project-card {
+  background: var(--bg);
+  padding: 3rem 2.8rem;
+  position: relative; overflow: hidden;
+  transition: background .4s;
+}
+.project-card::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 0; height: 100%;
+  background: linear-gradient(135deg, rgba(0,229,255,.04), rgba(155,89,255,.02));
+  transition: width .5s cubic-bezier(.16,1,.3,1);
+  z-index: 0;
+}
+.project-card:hover::after { width: 100%; }
+.project-card > * { position: relative; z-index: 1; }
+.project-card-top {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.project-industry {
+  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent); padding: .3rem .8rem;
+  border: 1px solid rgba(0,229,255,.2);
+  background: rgba(0,229,255,.05);
+}
+.project-country { font-size: 1.4rem; }
+.project-name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.5rem; line-height: 1.2;
+  margin-bottom: .4rem; color: var(--text);
+}
+.project-url {
+  font-size: .65rem; color: var(--muted); letter-spacing: .1em;
+  margin-bottom: 1.2rem; opacity: .7;
+}
+.project-desc {
+  font-size: .78rem; line-height: 1.8;
+  color: var(--muted); margin-bottom: 1.5rem;
+}
+.project-tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.project-tag {
+  font-size: .6rem; padding: .25rem .7rem;
+  border: 1px solid var(--border); color: var(--muted);
+  letter-spacing: .08em;
+}
+.project-tag.highlight {
+  border-color: rgba(0,229,255,.3); color: var(--accent);
+  background: rgba(0,229,255,.05);
+}
+.project-metrics {
+  display: flex; gap: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+.pm-item { }
+.pm-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  color: var(--text);
+}
+.pm-key { font-size: .6rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+.project-difficult {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .6rem; padding: .25rem .7rem;
+  border: 1px solid rgba(255,61,107,.3); color: var(--accent2);
+  background: rgba(255,61,107,.05);
+  letter-spacing: .08em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.project-note {
+  font-size: .72rem; line-height: 1.7;
+  color: rgba(0,229,255,.7);
+  font-style: italic;
+  padding: .8rem 1rem;
+  border-left: 2px solid rgba(0,229,255,.3);
+  background: rgba(0,229,255,.03);
+  margin-top: 1rem;
+}
+
+/* ── AI CONTENT NOTE ── */
+.ai-content-note {
+  margin: 2rem 0;
+  padding: 2rem 2.5rem;
+  border: 1px solid rgba(155,89,255,.3);
+  background: linear-gradient(135deg, rgba(155,89,255,.06), rgba(0,229,255,.03));
+  position: relative; overflow: hidden;
+}
+.ai-content-note::before {
+  content: '⚠';
+  position: absolute; right: 1.5rem; top: 1rem;
+  font-size: 3rem; opacity: .07;
+}
+.ai-note-label {
+  font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--accent3); margin-bottom: .8rem;
+  display: flex; align-items: center; gap: .6rem;
+}
+.ai-note-label::before {
+  content: ''; width: 20px; height: 1px; background: var(--accent3);
+}
+.ai-note-text { font-size: .8rem; line-height: 1.8; color: var(--text); }
+.ai-note-text strong { color: var(--accent); }
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; }
+  .container { padding: 0 1.5rem; }
+  .hero-glitch { display: none; }
+  .phil-grid { grid-template-columns: 1fr; }
+  .skills-layout { grid-template-columns: 1fr; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .article-container { grid-template-columns: 1fr; }
+  .inspiration-grid { grid-template-columns: 1fr; }
+  .lang-grid { grid-template-columns: repeat(2, 1fr); }
+  .contact-grid { grid-template-columns: 1fr; }
+  .quote-block { padding: 2.5rem 2rem; }
+  .services-grid { grid-template-columns: 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .jobs-quote-inner { padding: 3rem 2rem; }
+  .cta-buttons { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Cursor -->
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+
+<!-- Scroll progress -->
+<div id="scroll-bar"></div>
+
+<!-- Particle canvas -->
+<canvas id="particles-canvas"></canvas>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="nav-logo">S<span>.</span>HASAN</a>
+  <ul class="nav-links">
+    <li><a href="#philosophy">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#checklists">Checklists</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-badge">Open to Work</div>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">SEO Architect · Digital Strategist · Content Alchemist</div>
+    <h1 class="hero-headline">
+      <span class="line"><span>Ranking</span></span>
+      <span class="line"><span>Websites,</span></span>
+      <span class="line"><span>Shaping Futures.</span></span>
+    </h1>
+    <p class="hero-sub">
+      5+ years of distilled SEO mastery — across 200+ projects, 30+ global clients, 4 countries. 
+      No vanity metrics. Just real, measurable growth built on ethical strategy.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num"><span class="count-num" data-target="200">0</span><span class="accent">+</span></span>
+        <span class="stat-label">Projects Completed</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><span class="count-num" data-target="30">0</span><span class="accent">+</span></span>
+        <span class="stat-label">Companies Served</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><span class="count-num" data-target="5">0</span><span class="accent">+</span></span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num"><span class="count-num" data-target="4">0</span></span>
+        <span class="stat-label">Countries</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Start a Conversation</a>
+      <a href="#journey" class="btn-outline">See My Journey</a>
+    </div>
+  </div>
+  <div class="hero-glitch">
+    <div class="hero-ring"></div>
+    <div class="hero-ring-2"></div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">On-Page SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">Technical Audits<span class="dot">◆</span></span>
+    <span class="marquee-item">Content Strategy<span class="dot">◆</span></span>
+    <span class="marquee-item">Link Building<span class="dot">◆</span></span>
+    <span class="marquee-item">Local SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">E-Commerce SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">Core Web Vitals<span class="dot">◆</span></span>
+    <span class="marquee-item">White-Hat Growth<span class="dot">◆</span></span>
+    <span class="marquee-item">WordPress & Shopify<span class="dot">◆</span></span>
+    <span class="marquee-item">Analytics & Data<span class="dot">◆</span></span>
+    <span class="marquee-item">International SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">Schema Markup<span class="dot">◆</span></span>
+    <span class="marquee-item">On-Page SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">Technical Audits<span class="dot">◆</span></span>
+    <span class="marquee-item">Content Strategy<span class="dot">◆</span></span>
+    <span class="marquee-item">Link Building<span class="dot">◆</span></span>
+    <span class="marquee-item">Local SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">E-Commerce SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">Core Web Vitals<span class="dot">◆</span></span>
+    <span class="marquee-item">White-Hat Growth<span class="dot">◆</span></span>
+    <span class="marquee-item">WordPress & Shopify<span class="dot">◆</span></span>
+    <span class="marquee-item">Analytics & Data<span class="dot">◆</span></span>
+    <span class="marquee-item">International SEO<span class="dot">◆</span></span>
+    <span class="marquee-item">Schema Markup<span class="dot">◆</span></span>
+  </div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Services</span>
+      <div class="section-line"></div>
+      <span class="section-num">01</span>
+    </div>
+
+    <div class="services-grid reveal">
+      <div class="service-card">
+        <span class="service-icon">🔬</span>
+        <div class="service-title">Technical SEO Audit</div>
+        <p class="service-desc">Deep-dive audits covering crawlability, indexation, Core Web Vitals, site architecture, structured data, and everything search engines see before humans do.</p>
+        <div class="service-tags">
+          <span class="service-tag">Site Audit</span>
+          <span class="service-tag">Core Web Vitals</span>
+          <span class="service-tag">Schema</span>
+          <span class="service-tag">Log Analysis</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📝</span>
+        <div class="service-title">On-Page SEO Optimization</div>
+        <p class="service-desc">Precision optimization of every on-page element — title tags, headings, internal linking, content structure, keyword mapping, and semantic relevance signals.</p>
+        <div class="service-tags">
+          <span class="service-tag">Keyword Research</span>
+          <span class="service-tag">Content Mapping</span>
+          <span class="service-tag">Meta Optimization</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔗</span>
+        <div class="service-title">Off-Page & Link Building</div>
+        <p class="service-desc">White-hat authority building through editorial outreach, digital PR, niche edits, and strategic link acquisition that compounds domain authority over time.</p>
+        <div class="service-tags">
+          <span class="service-tag">Link Outreach</span>
+          <span class="service-tag">Digital PR</span>
+          <span class="service-tag">Niche Edits</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">✍️</span>
+        <div class="service-title">SEO Content Writing</div>
+        <p class="service-desc">Research-backed, E-E-A-T-optimized articles and web copy built to rank and convert — niche-specific, human-first, and algorithmically sound.</p>
+        <div class="service-tags">
+          <span class="service-tag">Long-form Articles</span>
+          <span class="service-tag">E-E-A-T</span>
+          <span class="service-tag">Content Strategy</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🛒</span>
+        <div class="service-title">E-Commerce SEO</div>
+        <p class="service-desc">Full-funnel optimization for Shopify, WooCommerce, Amazon, and marketplace platforms — product pages, category architecture, and buyer-intent content.</p>
+        <div class="service-tags">
+          <span class="service-tag">Shopify</span>
+          <span class="service-tag">Amazon SEO</span>
+          <span class="service-tag">Product Pages</span>
+          <span class="service-tag">Category SEO</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌍</span>
+        <div class="service-title">Local & International SEO</div>
+        <p class="service-desc">Dominate local search with Google Business optimization, citation building, and geo-targeted strategies — or expand globally with hreflang and international architecture.</p>
+        <div class="service-tags">
+          <span class="service-tag">Google Business</span>
+          <span class="service-tag">Local Citations</span>
+          <span class="service-tag">Hreflang</span>
+          <span class="service-tag">Multi-region</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🤝</span>
+        <div class="service-title">White-Label SEO</div>
+        <p class="service-desc">Invisible, reliable SEO execution under your agency's brand. I deliver — you present. Trusted by 30+ companies across 4 countries as a behind-the-scenes partner.</p>
+        <div class="service-tags">
+          <span class="service-tag">Agency Partner</span>
+          <span class="service-tag">NDA-Friendly</span>
+          <span class="service-tag">Scalable</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">📊</span>
+        <div class="service-title">SEO Reporting & Analytics</div>
+        <p class="service-desc">Clear, actionable reporting that connects rankings to revenue. GSC, GA4, Ahrefs, Semrush — translated into insights your team can actually act on.</p>
+        <div class="service-tags">
+          <span class="service-tag">GA4</span>
+          <span class="service-tag">GSC</span>
+          <span class="service-tag">Ahrefs</span>
+          <span class="service-tag">Semrush</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">⚡</span>
+        <div class="service-title">CMS SEO — WP / Shopify / Others</div>
+        <p class="service-desc">Platform-native SEO implementation on WordPress, Shopify, Wix, Webflow, and custom CMS environments — technical and content layers both handled.</p>
+        <div class="service-tags">
+          <span class="service-tag">WordPress</span>
+          <span class="service-tag">Shopify</span>
+          <span class="service-tag">Webflow</span>
+          <span class="service-tag">Custom CMS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-cta-strip reveal">
+      <div class="service-cta-text">Not sure which service you need? Let's figure it out together.</div>
+      <div class="service-cta-btns">
+        <a href="#contact" class="btn-primary">Get a Free Consultation</a>
+        <a href="#checklists" class="btn-outline">View SEO Checklists</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AI-Driven Approach -->
+<section id="ai-approach" style="padding:8rem 0;background:linear-gradient(135deg, rgba(155,89,255,.03), rgba(0,229,255,.02));position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:25rem;opacity:.015;font-family:'Syne',sans-serif;font-weight:800;pointer-events:none;color:var(--accent3);">AI</div>
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag" style="color:var(--accent3);">AI-Driven Approach</span>
+      <div class="section-line"></div>
+      <span class="section-num">02</span>
+    </div>
+
+    <div class="reveal" style="max-width:900px;margin:0 auto 4rem;text-align:center;">
+      <h2 style="font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.8rem);line-height:1.3;margin-bottom:1.5rem;font-style:italic;">
+        AI is a tool. <span style="color:var(--accent3);">Strategy</span> is still human.
+      </h2>
+      <p style="font-size:.85rem;line-height:1.9;color:var(--muted);max-width:700px;margin:0 auto;">
+        Search engines accept AI-generated content — but acceptance isn't endorsement. The difference between AI content that ranks and AI content that disappears is <strong style="color:var(--text);">intelligent human oversight</strong> at every stage.
+      </p>
+    </div>
+
+    <!-- The Framework -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.5px;background:var(--border);border:1px solid var(--border);margin-bottom:4rem;" class="reveal">
+      
+      <div style="background:var(--bg);padding:3rem 2.5rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:1rem;right:1.5rem;font-size:4rem;opacity:.06;">🧠</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent3);margin-bottom:1rem;">Step 1</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--text);">Research & Intent Mapping</h3>
+        <p style="font-size:.78rem;line-height:1.8;color:var(--muted);">AI analyzes SERP patterns, PAA queries, and competitor gaps. But <strong style="color:var(--text);">human judgment</strong> determines which insights actually matter for your audience and business model.</p>
+      </div>
+
+      <div style="background:var(--bg);padding:3rem 2.5rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:1rem;right:1.5rem;font-size:4rem;opacity:.06;">⚙️</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent3);margin-bottom:1rem;">Step 2</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--text);">Structure & Drafting</h3>
+        <p style="font-size:.78rem;line-height:1.8;color:var(--muted);">AI accelerates the first draft — outlines, semantic coverage, baseline content. But <strong style="color:var(--text);">human expertise</strong> injects original insights, removes generic phrasing, and aligns tone with brand voice.</p>
+      </div>
+
+      <div style="background:var(--bg);padding:3rem 2.5rem;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:1rem;right:1.5rem;font-size:4rem;opacity:.06;">✨</div>
+        <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent3);margin-bottom:1rem;">Step 3</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:1rem;color:var(--text);">Refinement & E-E-A-T</h3>
+        <p style="font-size:.78rem;line-height:1.8;color:var(--muted);">AI cannot fake expertise or lived experience. <strong style="color:var(--text);">Human editors</strong> add case studies, real data, personal perspective, and authoritative citations that AI would never organically generate.</p>
+      </div>
+
+    </div>
+
+    <!-- Critical Warning Box -->
+    <div class="reveal" style="border:2px solid rgba(255,61,107,.4);padding:2.5rem 3rem;background:linear-gradient(135deg,rgba(255,61,107,.08),rgba(255,61,107,.03));position:relative;overflow:hidden;margin-bottom:3rem;">
+      <div style="position:absolute;top:1.5rem;right:2rem;font-size:5rem;opacity:.08;color:var(--accent2);">⚠</div>
+      <div style="display:flex;align-items:flex-start;gap:1.5rem;">
+        <div style="flex-shrink:0;width:50px;height:50px;border-radius:50%;background:rgba(255,61,107,.15);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">🚫</div>
+        <div style="position:relative;z-index:1;">
+          <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent2);margin-bottom:.8rem;font-weight:700;">CRITICAL: What NOT to Do</div>
+          <p style="font-size:.85rem;line-height:1.9;color:var(--text);margin-bottom:1rem;">
+            <strong>Prompt → Publish is not SEO.</strong> It's content pollution. Writing a single-prompt article ("Write a 2000-word SEO article about X") and uploading it verbatim is a red flag to both search engines and readers.
+          </p>
+          <p style="font-size:.85rem;line-height:1.9;color:var(--muted);">
+            Google's algorithms can detect <strong style="color:var(--text);">low-effort patterns</strong>: repetitive phrasing, lack of original data, generic structure, absence of personal insight. AI detection isn't perfect, but <strong style="color:var(--text);">human readers know lazy content immediately</strong> — and bounce rates tell Google everything it needs to know.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- The Smart Way -->
+    <div class="reveal" style="display:grid;grid-template-columns:1fr 1.3fr;gap:4rem;align-items:center;">
+      <div>
+        <div style="font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent3);margin-bottom:1.5rem;display:flex;align-items:center;gap:.8rem;">
+          <span style="width:30px;height:1px;background:var(--accent3);display:block;"></span>
+          The Smart Way
+        </div>
+        <h3 style="font-family:'Fraunces',serif;font-size:2rem;line-height:1.3;margin-bottom:1.5rem;">AI as a <em style="color:var(--accent3);">research assistant</em>, not a ghostwriter.</h3>
+        <p style="font-size:.82rem;line-height:1.9;color:var(--muted);margin-bottom:1.5rem;">
+          Use AI to speed up competitor analysis, extract semantic keywords, identify content gaps, and generate structural outlines. Then <strong style="color:var(--text);">apply your expertise</strong>: rewrite in your voice, add real examples, cite authoritative sources, inject original opinions.
+        </p>
+        <p style="font-size:.82rem;line-height:1.9;color:var(--muted);">
+          The result? Content that passes AI detectors <em>and</em> human judgment — because it was never fully AI-written in the first place.
+        </p>
+      </div>
+      <div style="border:1px solid var(--border);padding:2.5rem;background:rgba(155,89,255,.04);">
+        <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent3);margin-bottom:1.5rem;">Real Workflow Example</div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(155,89,255,.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent3);">1</div>
+            <div>
+              <div style="font-size:.75rem;color:var(--text);margin-bottom:.3rem;font-weight:700;">AI does SERP research</div>
+              <div style="font-size:.7rem;color:var(--muted);line-height:1.6;">Analyze top 10 results, extract semantic keywords, identify content patterns</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(155,89,255,.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent3);">2</div>
+            <div>
+              <div style="font-size:.75rem;color:var(--text);margin-bottom:.3rem;font-weight:700;">Human creates structure</div>
+              <div style="font-size:.7rem;color:var(--muted);line-height:1.6;">Build the heading hierarchy, define unique angle, plan internal links</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(155,89,255,.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent3);">3</div>
+            <div>
+              <div style="font-size:.75rem;color:var(--text);margin-bottom:.3rem;font-weight:700;">AI generates baseline draft</div>
+              <div style="font-size:.7rem;color:var(--muted);line-height:1.6;">Produce section-by-section content using the approved outline</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(155,89,255,.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent3);">4</div>
+            <div>
+              <div style="font-size:.75rem;color:var(--text);margin-bottom:.3rem;font-weight:700;">Human rewrites & enriches</div>
+              <div style="font-size:.7rem;color:var(--muted);line-height:1.6;">Remove generic phrases, add case studies, inject expertise, cite sources</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <div style="flex-shrink:0;width:28px;height:28px;border-radius:50%;background:rgba(0,229,255,.2);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--accent);">✓</div>
+            <div>
+              <div style="font-size:.75rem;color:var(--accent);margin-bottom:.3rem;font-weight:700;">Result: Hybrid Content</div>
+              <div style="font-size:.7rem;color:var(--muted);line-height:1.6;">AI efficiency + human expertise = content that ranks <em>and</em> converts</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="reveal" style="text-align:center;margin-top:4rem;padding:3rem;border:1px solid rgba(155,89,255,.3);background:rgba(155,89,255,.04);">
+      <p style="font-size:.9rem;line-height:1.8;color:var(--text);max-width:700px;margin:0 auto;">
+        <strong style="color:var(--accent3);">Bottom line:</strong> AI is a multiplier for skilled SEOs. It speeds up research, drafting, and optimization — but it <strong>cannot replace</strong> strategic thinking, niche expertise, or authentic human perspective. Use it wisely.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Philosophy -->
+<section id="philosophy">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Philosophy</span>
+      <div class="section-line"></div>
+      <span class="section-num">03</span>
+    </div>
+
+    <div class="phil-grid reveal">
+      <div class="phil-card" data-icon="🎯">
+        <div class="phil-card-num">01</div>
+        <h3 class="phil-card-title">Data-First, Always</h3>
+        <p class="phil-card-desc">Every strategy decision is rooted in data. Gut feelings are interesting, but analytics are facts. I combine tools, research, and behavioral science to understand what search engines — and humans — actually want.</p>
+      </div>
+      <div class="phil-card" data-icon="🌱">
+        <div class="phil-card-num">02</div>
+        <h3 class="phil-card-title">White-Hat or Nothing</h3>
+        <p class="phil-card-desc">Shortcuts are illusions. Black-hat tactics might deliver a spike, but they leave a crater. I build sustainable, penalty-proof growth that compounds over time — because real clients deserve real results.</p>
+      </div>
+      <div class="phil-card" data-icon="🔮">
+        <div class="phil-card-num">03</div>
+        <h3 class="phil-card-title">Content is Infrastructure</h3>
+        <p class="phil-card-desc">I don't see content as "just writing." It's the architecture of your digital presence — every word is a signal to search engines, every sentence is a conversation with your audience.</p>
+      </div>
+      <div class="phil-card" data-icon="⚡">
+        <div class="phil-card-num">04</div>
+        <h3 class="phil-card-title">Adapt or Disappear</h3>
+        <p class="phil-card-desc">Google's algorithm evolves constantly. The SEOs who thrive aren't the ones who memorize rules — they're the ones who understand the underlying intent behind those rules and can pivot when they change.</p>
+      </div>
+    </div>
+
+    <div class="quote-block reveal">
+      <p class="quote-text">"SEO is not about gaming the system — it's about understanding what users want and delivering it better than anyone else. The search engine is just the judge."</p>
+      <span class="quote-attr">— Md. Sakibul Hasan</span>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Expertise</span>
+      <div class="section-line"></div>
+      <span class="section-num">04</span>
+    </div>
+
+    <div class="skills-layout">
+      <div>
+        <div class="skill-category reveal">
+          <div class="skill-cat-title">Core SEO</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">On-Page & Off-Page SEO <span>Expert</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">Technical SEO <span>Expert</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">Local & International SEO <span>Expert</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="92"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-cat-title">Content & Strategy</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">Content Writing & Management <span>Expert</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="95"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">Content Strategy <span>Intermediate</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="75"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">Analytics & Reporting <span>Advanced</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="85"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-category reveal">
+          <div class="skill-cat-title">Technical</div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">WordPress / Shopify / Others <span>Intermediate</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="78"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">HTML / CSS / PHP <span>Intermediate</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-bar-wrap">
+            <div class="skill-name">Computer Troubleshooting <span>Intermediate</span></div>
+            <div class="skill-track"><div class="skill-fill" data-width="72"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-right">
+        <div class="fact-card reveal">
+          <div class="fact-label">🔍 SEO Fact #1</div>
+          <p class="fact-text">The <strong>#1 result on Google</strong> receives approximately <strong>27.6% of all clicks</strong>. The jump from position 2 to position 1 is worth more than all positions from 3–10 combined.</p>
+        </div>
+        <div class="fact-card reveal">
+          <div class="fact-label">⚡ SEO Fact #2</div>
+          <p class="fact-text">A website that loads in <strong>1 second</strong> has a conversion rate <strong>3× higher</strong> than a site loading in 5 seconds. Speed isn't optional — it's SEO currency.</p>
+        </div>
+        <div class="fact-card reveal">
+          <div class="fact-label">📊 SEO Fact #3</div>
+          <p class="fact-text"><strong>68% of online experiences</strong> begin with a search engine. Every unoptimized page is a missed conversation with someone who was actively looking for what you offer.</p>
+        </div>
+        <div class="fact-card reveal">
+          <div class="fact-label">🧠 SEO Fact #4</div>
+          <p class="fact-text">Google processes over <strong>8.5 billion searches per day</strong>. Each one is a human with a need, a question, or a problem to solve. SEO is the bridge between that person and your solution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quote 2 -->
+<div style="position:relative; z-index:1; padding: 0 3rem;">
+  <div style="max-width:1200px; margin: 0 auto;">
+    <div class="quote-block reveal" style="border-left-color: var(--accent3);">
+      <p class="quote-text">"The best place to hide a dead body is page 2 of Google search results."</p>
+      <span class="quote-attr">— Industry Wisdom</span>
+    </div>
+  </div>
+</div>
+
+<!-- Checklists -->
+<section id="checklists">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Advanced SEO Checklists</span>
+      <div class="section-line"></div>
+      <span class="section-num">05</span>
+    </div>
+    <p class="reveal" style="font-size:.85rem; color:var(--muted); line-height:1.8; max-width:700px; margin-bottom:3rem;">Professional-grade checklists built from 5+ years of real-world SEO work. Click items to track your progress — these are the exact frameworks applied across 200+ projects.</p>
+
+    <div class="checklist-tabs reveal">
+      <button class="tab-btn active" onclick="switchTab('technical')">⚙ Technical SEO</button>
+      <button class="tab-btn" onclick="switchTab('onpage')">📝 On-Page SEO</button>
+      <button class="tab-btn" onclick="switchTab('offpage')">🔗 Off-Page & Backlinks</button>
+      <button class="tab-btn" onclick="switchTab('content')">✍ SEO Article Writing</button>
+    </div>
+
+    <!-- TECHNICAL SEO -->
+    <div class="checklist-panel active" id="panel-technical">
+      <div class="checklist-header">
+        <div class="cl-header-left">
+          <div class="cl-title">Technical SEO Audit Checklist</div>
+          <div class="cl-subtitle">Advanced · 32 checkpoints · Foundation for all SEO work</div>
+        </div>
+        <div class="cl-progress-wrap">
+          <div class="cl-progress-label">Progress</div>
+          <div class="cl-progress-bar"><div class="cl-progress-fill" id="prog-technical" style="width:0%"></div></div>
+          <div class="cl-count" id="count-technical">0 / 32 completed</div>
+        </div>
+      </div>
+      <div class="checklist-body">
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🕷</span><span class="cl-cat-name">Crawling & Indexation</span><span class="cl-cat-count">8 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Verify robots.txt is properly configured and not blocking critical resources</div><div class="cl-item-desc">Check that CSS, JS, and key page templates are not disallowed. Use Google Search Console's robots.txt tester.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Audit XML sitemap — completeness, accuracy, and submission status</div><div class="cl-item-desc">Ensure all canonical URLs are included, no noindex pages appear, and the sitemap is submitted to GSC. Check lastmod dates.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Crawl the site with Screaming Frog or Sitebulb and identify crawl errors</div><div class="cl-item-desc">Look for 4xx/5xx responses, redirect chains, orphan pages, and pages with no inlinks.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Verify crawl budget is not wasted on low-value URLs</div><div class="cl-item-desc">Faceted navigation, session IDs, infinite scroll, and URL parameters can drain crawl budget from important pages.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Check indexation status via site: operator and Google Search Console</div><div class="cl-item-desc">Compare indexed page count vs total crawlable pages. Investigate significant gaps — over or under indexation.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Inspect noindex tags — intentional vs accidental</div><div class="cl-item-desc">Scan for meta noindex, x-robots-tag HTTP headers, and GSC coverage report exclusions. Dev environment leakage is common.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Analyze server log files for Googlebot crawl patterns</div><div class="cl-item-desc">Log analysis reveals which pages bots actually visit vs which you want them to, and how frequently. Use Screaming Frog Log Analyzer.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Validate canonical tags are self-referencing and consistent</div><div class="cl-item-desc">Every indexable page should have a self-referencing canonical. Canonicals must match across HTML, HTTP headers, and sitemap.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">⚡</span><span class="cl-cat-name">Core Web Vitals & Performance</span><span class="cl-cat-count">7 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Run PageSpeed Insights and achieve 90+ scores on mobile and desktop</div><div class="cl-item-desc">Focus on LCP (under 2.5s), FID/INP (under 200ms), and CLS (under 0.1). These are direct ranking signals.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Optimize and compress all images — WebP format, lazy loading, proper sizing</div><div class="cl-item-desc">Images are the #1 cause of slow LCP. Use next-gen formats, serve correctly sized images, and implement native lazy loading.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Implement browser caching, GZIP/Brotli compression, and CDN</div><div class="cl-item-desc">Set proper cache-control headers, enable server-side compression, and use a CDN to reduce TTFB globally.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Minimize render-blocking resources — CSS, JS defer/async</div><div class="cl-item-desc">Unused CSS/JS delays First Contentful Paint. Use async/defer for non-critical JS, and split CSS for above-the-fold.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Measure and fix Cumulative Layout Shift (CLS) issues</div><div class="cl-item-desc">Reserve space for images, ads, and embeds. Avoid inserting content above existing content after page load.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Test mobile usability in GSC and resolve all touch/viewport issues</div><div class="cl-item-desc">Check for content wider than screen, clickable elements too close together, and text too small to read without zooming.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Reduce Time to First Byte (TTFB) to under 200ms</div><div class="cl-item-desc">TTFB is server response time. Investigate hosting quality, database queries, caching, and server-side processing.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🏗</span><span class="cl-cat-name">Site Architecture & URLs</span><span class="cl-cat-count">5 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Ensure flat URL structure — no page more than 3 clicks from homepage</div><div class="cl-item-desc">Deep page hierarchy dilutes PageRank and reduces crawl frequency for important pages. Flatten where possible.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Audit and fix all redirect chains and redirect loops</div><div class="cl-item-desc">Each redirect hop loses link equity. All 301 redirects should go directly from old URL to final destination in one step.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Verify HTTPS is properly implemented — no mixed content warnings</div><div class="cl-item-desc">Check HTTP to HTTPS redirects, HSTS headers, and scan for mixed content (HTTP resources on HTTPS pages).</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Consolidate www and non-www versions to a single canonical domain</div><div class="cl-item-desc">Both versions should redirect to one preferred version. Inconsistency splits link equity and causes duplicate content.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Audit URL parameters and implement GSC parameter handling</div><div class="cl-item-desc">Tracking parameters, filters, and sorting can create millions of duplicate URLs. Use canonical tags or noindex to control them.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🧬</span><span class="cl-cat-name">Structured Data & Schema</span><span class="cl-cat-count">4 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Implement relevant schema markup — Article, FAQ, Product, Organization, Breadcrumb</div><div class="cl-item-desc">Use JSON-LD (Google's preferred format). Match schema type to page purpose. Validate with Google's Rich Results Test.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Validate all schema for errors using Schema.org validator and GSC Enhancements</div><div class="cl-item-desc">Schema errors prevent rich results. Monitor GSC Enhancements tab for warnings and eligibility status.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Implement HowTo, Review, or Event schema where appropriate for rich snippets</div><div class="cl-item-desc">Rich snippets increase CTR by 20–30%. Target eligible schema types for your content verticals.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Build entity-based structured data for E-E-A-T signals (Author, Person, Organization)</div><div class="cl-item-desc">Link author pages to Schema.org Person markup, include sameAs properties linking to social profiles and authoritative sources.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🌐</span><span class="cl-cat-name">International & Hreflang</span><span class="cl-cat-count">4 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Implement hreflang tags for multilingual/multi-regional sites</div><div class="cl-item-desc">Every hreflang set must be bidirectional (all language versions must reference each other). Use ISO 639-1 language codes.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Choose correct international URL structure — ccTLD, subdomain, or subfolder</div><div class="cl-item-desc">ccTLDs (.co.uk, .de) have strongest geo-signal. Subfolders (/it/, /fr/) are easiest to manage and share domain authority.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Verify hreflang implementation with Hreflang Checker tools</div><div class="cl-item-desc">Missing return tags, wrong language codes, and noindex pages in hreflang sets are the most common implementation errors.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('technical')"><div class="cl-item-content"><div class="cl-item-title">Use geo-targeting settings in Google Search Console for subdomains and subfolders</div><div class="cl-item-desc">Set the target country in GSC for each international version to strengthen geo-relevance signals.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ON-PAGE SEO -->
+    <div class="checklist-panel" id="panel-onpage">
+      <div class="checklist-header">
+        <div class="cl-header-left">
+          <div class="cl-title">On-Page SEO Checklist</div>
+          <div class="cl-subtitle">Advanced · 28 checkpoints · Per-page optimization framework</div>
+        </div>
+        <div class="cl-progress-wrap">
+          <div class="cl-progress-label">Progress</div>
+          <div class="cl-progress-bar"><div class="cl-progress-fill" id="prog-onpage" style="width:0%"></div></div>
+          <div class="cl-count" id="count-onpage">0 / 28 completed</div>
+        </div>
+      </div>
+      <div class="checklist-body">
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🔍</span><span class="cl-cat-name">Keyword Research & Intent Mapping</span><span class="cl-cat-count">6 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Identify primary keyword + 3–5 semantic LSI variations for each page</div><div class="cl-item-desc">Use Ahrefs, Semrush, or Google's "People Also Ask" to map semantic variations. Target topic clusters, not just single keywords.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Analyze SERP intent — informational, navigational, commercial, or transactional</div><div class="cl-item-desc">The content format must match the dominant intent on the SERP. Ranking with wrong content type is nearly impossible.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Map each keyword to exactly one target page (keyword cannibalization audit)</div><div class="cl-item-desc">Multiple pages targeting the same keyword compete against each other. Consolidate or differentiate with unique intent angles.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Analyze top 10 SERP competitors for content length, format, and depth</div><div class="cl-item-desc">Content needs to be at least as comprehensive as the current top rankers. Use SurferSEO or Clearscope for NLP analysis.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Identify featured snippet opportunities and optimize content format accordingly</div><div class="cl-item-desc">Direct answer boxes, tables, numbered lists, and definition formats all have high featured snippet eligibility.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Target long-tail variations and question-based queries (PAA, voice search)</div><div class="cl-item-desc">Long-tail keywords have lower competition and higher conversion intent. Use Answer The Public and GSC queries data.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🏷</span><span class="cl-cat-name">Title Tags, Meta & Headings</span><span class="cl-cat-count">7 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Write unique, compelling title tags with primary keyword near the front (50–60 chars)</div><div class="cl-item-desc">Title tag is the most powerful on-page signal. Include primary keyword, brand where appropriate, and a compelling hook.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Craft meta descriptions that drive CTR — include CTA and keyword (150–160 chars)</div><div class="cl-item-desc">Meta descriptions are not a direct ranking factor but critically affect CTR. Higher CTR sends positive engagement signals.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Use one H1 per page containing the exact-match or close-match primary keyword</div><div class="cl-item-desc">H1 is the page's topic declaration. It should match the title intent while being slightly different in phrasing.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Structure H2/H3 headings to cover semantic subtopics and answer related queries</div><div class="cl-item-desc">Heading hierarchy should mirror the topic cluster. H2s signal major subtopics; H3s provide supporting detail.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Verify all pages have unique title tags and meta descriptions — no duplication</div><div class="cl-item-desc">Duplicate meta signals confusion to search engines. Audit with Screaming Frog and resolve all duplicates.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Optimize Open Graph and Twitter Card meta for social shareability</div><div class="cl-item-desc">Social signals drive traffic and indirect ranking signals. Set og:title, og:description, og:image for all key pages.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Preview titles in SERP snippet tools and adjust for truncation and appeal</div><div class="cl-item-desc">Use Portent SERP Preview or Google's own preview in GSC. Ensure brand name fits without critical information being cut.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🔗</span><span class="cl-cat-name">Internal Linking & Content Structure</span><span class="cl-cat-count">5 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Build strategic internal links using keyword-rich anchor text from high-authority pages</div><div class="cl-item-desc">Internal links pass PageRank. Link from high-traffic/authority pages to your key conversion or ranking targets.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Identify and fix orphan pages (pages with no internal links)</div><div class="cl-item-desc">Orphan pages are rarely crawled and weakly ranked. Every important page needs at least 3 internal links.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Create content silos / topic clusters with clear pillar-supporting page architecture</div><div class="cl-item-desc">Pillar pages cover broad topics; cluster pages cover subtopics. Internal links flow from cluster to pillar for authority concentration.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Optimize image alt text with descriptive, keyword-relevant descriptions</div><div class="cl-item-desc">Alt text is read by screen readers and crawled by bots. Use descriptive language that naturally includes target keywords.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Add breadcrumb navigation with correct schema markup on all pages</div><div class="cl-item-desc">Breadcrumbs improve UX and search navigation, show in SERPs, and reinforce site hierarchy signals.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">📊</span><span class="cl-cat-name">E-E-A-T & User Experience</span><span class="cl-cat-count">5 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Add author bio with credentials, social links, and expertise signals on articles</div><div class="cl-item-desc">Google's QRG rates pages on Expertise, Experience, Authoritativeness, and Trustworthiness. Named authors with credentials matter.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Include last-updated dates and keep content fresh (freshness signals)</div><div class="cl-item-desc">For evergreen content, updating dates and adding new information signals relevance. Fresh content gets re-crawled more frequently.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Cite authoritative external sources with outbound links to .gov, .edu, or industry leaders</div><div class="cl-item-desc">Outbound links to trusted sources improve topical trust and E-E-A-T. Don't be a dead end — link out strategically.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Optimize for Pogo-sticking prevention — match content depth to search intent fully</div><div class="cl-item-desc">If users hit back immediately after landing, it signals poor relevance. Ensure the page fully satisfies the query intent.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Add trust signals — privacy policy, contact page, About page, reviews/testimonials</div><div class="cl-item-desc">Trust signals affect Quality Rater assessments and overall domain trustworthiness. Especially critical for YMYL niches.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🎯</span><span class="cl-cat-name">URL Optimization</span><span class="cl-cat-count">5 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Use short, descriptive, keyword-rich URLs — no stop words, no IDs, hyphens only</div><div class="cl-item-desc">Ideal URL: domain.com/primary-keyword-phrase/ — Short, readable, includes keyword, uses hyphens not underscores.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Ensure all URLs are lowercase and canonicalized to avoid case-sensitive duplicates</div><div class="cl-item-desc">/Page/ and /page/ can be treated as different URLs. Force lowercase at server level and use canonical tags.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Use trailing slash consistency and redirect inconsistencies</div><div class="cl-item-desc">/page/ and /page are different URLs. Pick one, redirect the other, use it consistently across all internal links.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Remove dates from blog post URLs to enable evergreen content updating</div><div class="cl-item-desc">/blog/2021/seo-tips/ becomes outdated. Use /blog/seo-tips/ to allow indefinite content freshening without URL changes.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('onpage')"><div class="cl-item-content"><div class="cl-item-title">Map all old/changed URLs to 301 redirects — no broken links, no lost equity</div><div class="cl-item-desc">Every URL change that doesn't redirect loses accumulated link equity. Maintain a redirect map and update it with every migration.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- OFF-PAGE SEO -->
+    <div class="checklist-panel" id="panel-offpage">
+      <div class="checklist-header">
+        <div class="cl-header-left">
+          <div class="cl-title">Off-Page SEO & Link Building Checklist</div>
+          <div class="cl-subtitle">Advanced · 26 checkpoints · Authority & trust building framework</div>
+        </div>
+        <div class="cl-progress-wrap">
+          <div class="cl-progress-label">Progress</div>
+          <div class="cl-progress-bar"><div class="cl-progress-fill" id="prog-offpage" style="width:0%"></div></div>
+          <div class="cl-count" id="count-offpage">0 / 26 completed</div>
+        </div>
+      </div>
+      <div class="checklist-body">
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🔍</span><span class="cl-cat-name">Backlink Profile Audit</span><span class="cl-cat-count">6 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Audit full backlink profile using Ahrefs, Semrush, and Google Search Console</div><div class="cl-item-desc">Cross-reference multiple tools — each has different link index coverage. Look at DR, UR, anchor distribution, and referring domains.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Identify and disavow toxic, spammy, or manipulative backlinks</div><div class="cl-item-desc">Spammy link patterns can trigger manual actions. Use Ahrefs' Toxic Score and Google's Disavow Tool to clean the profile.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Analyze anchor text distribution — ensure no over-optimization of exact-match anchors</div><div class="cl-item-desc">Natural profiles have 40–60% branded, 20–30% generic, and only 5–15% exact-match anchors. Over-optimization triggers Penguin.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Compare link velocity with competitors — identify acquisition rate benchmarks</div><div class="cl-item-desc">Sudden link spikes look unnatural. Steady, growing link acquisition velocity signals organic authority growth.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Identify lost or broken backlinks and reclaim them with updated redirects</div><div class="cl-item-desc">Use Ahrefs' "Lost Backlinks" report to find opportunities. Contact site owners for broken links — high success rate.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Benchmark Domain Rating / Domain Authority against top 3 competitors</div><div class="cl-item-desc">DR gap analysis shows how much link building is required to compete. Focus on topically relevant authority, not just raw numbers.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🏗</span><span class="cl-cat-name">Link Acquisition Strategy</span><span class="cl-cat-count">8 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Execute broken link building — find dead links on authority sites and offer replacements</div><div class="cl-item-desc">Use Ahrefs Content Explorer to find pages with outbound 404s. Create or repurpose content that fits the broken link's context.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Launch skyscraper content campaigns — create definitively better resources than current top linkers</div><div class="cl-item-desc">Find pages with 50+ backlinks, create a 10x better version, then outreach to everyone linking to the original.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Pursue guest posting on topically relevant, high-authority sites in your niche</div><div class="cl-item-desc">Focus on topical relevance over raw DA. A DR 50 site in your exact niche beats a DR 80 general site for topical authority.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Build unlinked brand mention links — find mentions of your brand without a link</div><div class="cl-item-desc">Use Ahrefs Alerts, Google Alerts, or Brand24 to find brand mentions. Reach out to convert them to linked citations.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Leverage digital PR — create data studies, original research, or newsworthy content for media coverage</div><div class="cl-item-desc">Original data gets linked naturally. Surveys, industry reports, and original research attract editorial links from high-DA news sites.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Build links from resource pages, curated link lists, and industry directories</div><div class="cl-item-desc">Resource page link building: find "useful resources" pages in your niche. Pitch your content as a genuine addition to their curation.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Submit to high-quality, niche-specific directories and citation sites (NAP consistency)</div><div class="cl-item-desc">For local SEO especially, consistent NAP (Name, Address, Phone) across all directories is a critical trust signal.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Pursue HARO (Help a Reporter Out) and journalist outreach for editorial backlinks</div><div class="cl-item-desc">HARO, Qwoted, and SourceBottle connect you with journalists seeking expert quotes. .edu and .gov links often come this way.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+          </div>
+        </div>
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">📣</span><span class="cl-cat-name">Social & Brand Signals</span><span class="cl-cat-count">6 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Build consistent brand presence across all major social platforms</div><div class="cl-item-desc">Social profiles appear in branded SERPs and contribute to brand entity strength. Claim handles on LinkedIn, Twitter/X, Facebook, Instagram.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Create and optimize Google Business Profile with complete information and regular posts</div><div class="cl-item-desc">GBP is the cornerstone of local SEO. Complete all fields, upload photos, gather reviews, and post weekly for local pack visibility.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Generate and respond to reviews on Google, Trustpilot, and industry-specific platforms</div><div class="cl-item-desc">Reviews influence local rankings, CTR, and conversion rates. A systematic review-generation process is essential.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Build Wikipedia, Wikidata, and knowledge panel entity presence</div><div class="cl-item-desc">Entity recognition by Google is a core part of modern SEO. Wikipedia links are among the most trusted entity signals.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Publish on Medium, LinkedIn Articles, and niche forums for content syndication</div><div class="cl-item-desc">Content syndication extends reach and drives referral traffic. Use canonical tags pointing back to original when syndicating.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Participate in podcast interviews and YouTube collaborations for diverse, high-trust links</div><div class="cl-item-desc">Podcast show notes regularly include do-follow links. Video collaborations drive referral traffic and brand entity signals.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+          </div>
+        </div>
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">📧</span><span class="cl-cat-name">Outreach Best Practices</span><span class="cl-cat-count">6 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Personalize every outreach email — reference specific content, add genuine value proposition</div><div class="cl-item-desc">Generic outreach gets ignored. Show you've read their content, explain exactly why your resource benefits their audience.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Build prospect lists using Ahrefs Link Intersect to find competitors' shared linking domains</div><div class="cl-item-desc">If 3 competitors have links from the same domain, that site is clearly open to linking in your niche. Priority prospect.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Follow up once (not more) — respect, patience, and politeness over persistence</div><div class="cl-item-desc">One follow-up after 5–7 business days is appropriate. More than that damages your domain's outreach reputation.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Track outreach in a CRM — status, response rate, conversion rate, link placement</div><div class="cl-item-desc">Without tracking, you can't optimize. Industry average response rates are 5–10%; conversion to link is 1–3%. Know your numbers.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">A/B test outreach subject lines — subject line is the #1 determinant of open rate</div><div class="cl-item-desc">Test curiosity vs. benefit vs. personalization subject lines. Aim for 30%+ open rates. Tools: Pitchbox, BuzzStream, Mailshake.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('offpage')"><div class="cl-item-content"><div class="cl-item-title">Set minimum quality thresholds — DR 20+, traffic > 500/mo, topically relevant, clean link profile</div><div class="cl-item-desc">Not all links are created equal. A link from a relevant DR 25 site with real traffic beats a DR 60 irrelevant PBN site every time.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SEO CONTENT WRITING -->
+    <div class="checklist-panel" id="panel-content">
+      <div class="checklist-header">
+        <div class="cl-header-left">
+          <div class="cl-title">SEO-Friendly Article Writing Checklist</div>
+          <div class="cl-subtitle">Advanced · 24 checkpoints · Pre-write to post-publish framework</div>
+        </div>
+        <div class="cl-progress-wrap">
+          <div class="cl-progress-label">Progress</div>
+          <div class="cl-progress-bar"><div class="cl-progress-fill" id="prog-content" style="width:0%"></div></div>
+          <div class="cl-count" id="count-content">0 / 24 completed</div>
+        </div>
+      </div>
+
+      <div class="ai-content-note">
+        <div class="ai-note-label">A Note on AI-Generated Content</div>
+        <p class="ai-note-text">Yes, <strong>AI can assist in writing</strong> — and used intelligently, it's a legitimate part of a modern SEO workflow. But here's the line most beginners cross: <strong>pasting a keyword into ChatGPT and publishing the output is not SEO strategy — it's a red flag.</strong> Search engines are getting sharper at detecting low-effort AI content, and more importantly, so are readers. The real skill isn't in prompting — it's in knowing what a topic needs, what the audience wants, what the SERP rewards, and then using AI as a <strong>research assistant, not a ghostwriter.</strong> Craft the structure yourself. Add original insight. Inject real experience. Let AI handle the grunt work — not the thinking. That distinction is what separates an SEO professional from someone who just has a ChatGPT subscription.</p>
+      </div>
+      <div class="checklist-body">
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">📋</span><span class="cl-cat-name">Pre-Writing Research</span><span class="cl-cat-count">6 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Analyze SERP for the target keyword — study top 5 results for format, length, and angle</div><div class="cl-item-desc">If all top results are listicles, write a better listicle. If they're guides, write a better guide. SERP format matching is critical to rank.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Extract all PAA (People Also Ask) questions and GSC query data for subtopics</div><div class="cl-item-desc">PAA reveals the specific questions real users ask. Answering all of them in one article creates comprehensive topical coverage.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Build a semantic keyword map using NLP tools (SurferSEO, Clearscope, or Frase)</div><div class="cl-item-desc">NLP tools analyze top-ranking content and identify which semantic terms must appear in your article for topical completeness.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Identify the "content gap" — what angle or information is missing from current top results</div><div class="cl-item-desc">Your article needs a reason to exist. Find the unique angle, deeper data, updated information, or better UX than all current rankers.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Determine ideal word count based on SERP analysis — not word count myths</div><div class="cl-item-desc">Word count is not a ranking factor per se. Write as much as needed to fully answer the query — no filler, no padding.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Identify linking opportunities — internal pages to link to and external sources to cite</div><div class="cl-item-desc">Plan internal and external links before writing. Knowing which pages you'll link to helps structure the content logically.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">✍️</span><span class="cl-cat-name">Writing & Structure</span><span class="cl-cat-count">7 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Write an intro that hooks within 2 sentences and previews the article's value</div><div class="cl-item-desc">The first 100 words determine bounce rate. State the benefit immediately, confirm you understand the reader's problem, and preview the solution.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Use the Inverted Pyramid structure — most critical information first, supporting detail below</div><div class="cl-item-desc">Users scan before they read. Put your key takeaway in the intro, then elaborate. This also helps for featured snippet selection.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Write at a reading level appropriate for the audience — use Hemingway App or Readability Score</div><div class="cl-item-desc">Most web content should be at a Grade 7–9 reading level. Complex niches can go higher, but clarity always wins over complexity.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Place primary keyword in first 100 words naturally — not forced</div><div class="cl-item-desc">Early keyword placement confirms topical relevance to crawlers. But never sacrifice readability — Google reads naturalness.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Format for scanners — use H2/H3 headers every 300–400 words, short paragraphs, bullets</div><div class="cl-item-desc">79% of users scan before reading. Headers act as signposts. Short paragraphs reduce cognitive load and improve mobile readability.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Include original data, examples, statistics, or case studies that cannot be found elsewhere</div><div class="cl-item-desc">Unique data attracts backlinks passively. Original research, surveys, or original examples signal genuine E-E-A-T (Experience).</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Add a strong, specific conclusion with a clear call to action or next step</div><div class="cl-item-desc">A clear next step (read this, try this, download this) reduces bounce and signals positive engagement to search engines.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">🔧</span><span class="cl-cat-name">Post-Writing Optimization</span><span class="cl-cat-count">6 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Run content through NLP tool and hit target Content Score (SurferSEO 67+, Clearscope A)</div><div class="cl-item-desc">NLP content scoring ensures your article covers the right semantic terms at the right density compared to top-ranking competitors.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Verify keyword density is natural — 0.5–1.5% for primary, no stuffing</div><div class="cl-item-desc">Keyword stuffing is a negative signal. Focus on topical depth and semantic coverage rather than mechanical keyword repetition.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Add FAQ section with schema markup targeting PAA and voice search queries</div><div class="cl-item-desc">FAQ sections with FAQ schema are eligible for rich results and directly target the questions in the PAA box.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Optimize all images — compress, add descriptive alt text, use target keyword naturally</div><div class="cl-item-desc">Images appear in Google Image Search. Optimized alt text adds relevance signals and accessibility compliance (WCAG).</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Add 3–5 strategic internal links and 2–3 authoritative external links</div><div class="cl-item-desc">Internal links keep users on site and distribute PageRank. External links to .gov/.edu or top industry sources build topical trust.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Submit URL to Google Search Console for immediate indexing after publishing</div><div class="cl-item-desc">Use the URL Inspection Tool → Request Indexing. This triggers faster crawling of new content, especially important for time-sensitive pieces.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+          </div>
+        </div>
+        <div class="cl-category">
+          <div class="cl-cat-header"><span class="cl-cat-icon">📈</span><span class="cl-cat-name">Content Monitoring & Iteration</span><span class="cl-cat-count">5 items</span></div>
+          <div class="cl-items">
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Track rankings, impressions, and clicks in GSC — review at 30, 60, 90 day intervals</div><div class="cl-item-desc">Most content takes 3–6 months to reach its ranking potential. Don't judge success too early; track the trend, not a snapshot.</div></div><span class="cl-item-badge badge-critical">Critical</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Monitor GSC for secondary keyword impressions — identify content expansion opportunities</div><div class="cl-item-desc">GSC queries tab shows what you're ranking for. If you're getting impressions for a related keyword, expand content to target it.</div></div><span class="cl-item-badge badge-advanced">Advanced</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Update content every 6–12 months — refresh statistics, add new sections, improve depth</div><div class="cl-item-desc">Content freshness is a ranking signal for some query types. Regular updates keep content competitive and reduce ranking decay.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Monitor GA4 for engagement metrics — time on page, scroll depth, bounce rate</div><div class="cl-item-desc">Poor engagement signals (high bounce + low time on page) indicate content-intent mismatch. Revise or restructure underperforming content.</div></div><span class="cl-item-badge badge-important">Important</span></div>
+            <div class="cl-item"><input type="checkbox" class="cl-checkbox" onchange="updateProgress('content')"><div class="cl-item-content"><div class="cl-item-title">Promote published content via outreach, social, and internal linking from newer posts</div><div class="cl-item-desc">Publishing without promotion leaves rankings to chance. Content promotion drives initial traffic signals that help Google evaluate quality.</div></div><span class="cl-item-badge badge-boost">Boost</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Journey -->
+<section id="journey">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Journey</span>
+      <div class="section-line"></div>
+      <span class="section-num">06</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem;">
+      <div class="timeline">
+        <div class="tl-entry">
+          <div class="tl-dot"></div>
+          <div class="tl-date">2021 — 2024</div>
+          <h3 class="tl-title">Jr. SEO Analyst & Web Content Manager</h3>
+          <div class="tl-org">onlinemarketingehelp.co.uk — UK Based Agency</div>
+          <ul class="tl-points">
+            <li>Conducted deep-dive research and authored high-quality, niche-specific content tailored to diverse client verticals</li>
+            <li>Analyzed and optimized off-page, on-page, and technical SEO across multiple client websites simultaneously</li>
+            <li>Delivered measurable improvements in search engine rankings and organic traffic — all documented through analytics</li>
+            <li>Collaborated with international clients remotely — managing timelines, revisions, and strategy pivots</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-dot" style="border-color:var(--accent3);box-shadow:0 0 12px rgba(155,89,255,.5)"></div>
+          <div class="tl-date" style="color:var(--accent3);">2020 — 2022</div>
+          <h3 class="tl-title">Level 2 Fiverr Seller</h3>
+          <div class="tl-org">SEO & Content Writing Management — Fiverr.com</div>
+          <ul class="tl-points">
+            <li>Attained Level 2 Seller status through consistently exceptional delivery and 5-star client reviews</li>
+            <li>Served social media brands, business websites, and major e-commerce platforms including Amazon, Flipkart, Walmart, and Etsy</li>
+            <li>Designed and executed organic growth campaigns that increased visitor counts, engagement, and sales conversions</li>
+            <li>Operated as a trusted white-label provider — the invisible engine behind multiple agencies' client results</li>
+          </ul>
+        </div>
+
+        <div class="tl-entry">
+          <div class="tl-dot" style="border-color:var(--accent2);box-shadow:0 0 12px rgba(255,61,107,.4)"></div>
+          <div class="tl-date" style="color:var(--accent2);">2020 — Present</div>
+          <h3 class="tl-title">Independent SEO Specialist</h3>
+          <div class="tl-org">Freelance — Global Clients, 4 Countries</div>
+          <ul class="tl-points">
+            <li>Worked with 30+ companies on 200+ projects spanning the UK, Bangladesh, Italy, and beyond</li>
+            <li>Specialized in white-label SEO — delivering results under clients' brands, building their credibility</li>
+            <li>Continuously self-educating through algorithm updates, industry publications, and hands-on testing</li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        <div class="reveal" style="margin-bottom:2rem;">
+          <div style="font-family:'Fraunces',serif; font-size:1.5rem; line-height:1.5; margin-bottom:1.5rem;">
+            The White-Label Reality
+          </div>
+          <p style="font-size:.82rem; line-height:1.9; color:var(--muted); margin-bottom:1rem;">
+            Here's something most SEO portfolios won't tell you: <strong style="color:var(--text);">the best work is often invisible.</strong> The campaigns that drove the most impact, the rankings that transformed businesses, the content that captured #1 positions — they live under someone else's brand.
+          </p>
+          <p style="font-size:.82rem; line-height:1.9; color:var(--muted); margin-bottom:1rem;">
+            That's the nature of white-label SEO. You become the quiet architect behind visible success. And while a portfolio can't show you those URLs, the <strong style="color:var(--text);">patterns, the process, and the results speak through the consistency</strong> — 200 projects, 30+ clients, zero shortcuts.
+          </p>
+          <p style="font-size:.82rem; line-height:1.9; color:var(--muted);">
+            Every anonymous case study represents a business that now ranks, converts, and grows. That's the metric that matters most.
+          </p>
+        </div>
+
+        <div class="quote-block reveal" style="border-left-color:var(--accent2); margin:0; padding:2rem 3rem;">
+          <p class="quote-text" style="font-size:1.1rem;">"True expertise leaves fingerprints everywhere — even when your name isn't on the page."</p>
+          <span class="quote-attr">— Md. Sakibul Hasan</span>
+        </div>
+
+        <div class="reveal" style="margin-top:2rem; border:1px solid var(--border); padding:2rem;">
+          <div class="sidebar-card-title" style="margin-bottom:1.2rem;">Education</div>
+          <div style="margin-bottom:1.5rem;">
+            <div style="font-size:.75rem; color:var(--accent3); letter-spacing:.1em; margin-bottom:.4rem;">CURRENT</div>
+            <div style="font-size:.9rem; color:var(--text); margin-bottom:.2rem;">Bachelor — Civil & Environmental Engineering</div>
+            <div style="font-size:.75rem; color:var(--muted);">University of Naples Federico II, Italy</div>
+          </div>
+          <div>
+            <div style="font-size:.75rem; color:var(--accent3); letter-spacing:.1em; margin-bottom:.4rem;">PRIOR</div>
+            <div style="font-size:.9rem; color:var(--text); margin-bottom:.2rem;">SSC & HSC — GPA 5.00 / 5.00</div>
+            <div style="font-size:.75rem; color:var(--muted);">Govt. Mohammadpur Model College, Bangladesh</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Metrics -->
+<section id="metrics" style="padding:6rem 0;">
+  <div class="container">
+    <div class="metrics-grid reveal">
+      <div class="metric-card">
+        <span class="metric-num" data-target="200" data-suffix="+">0</span>
+        <span class="metric-label">Projects Delivered</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-num" data-target="30" data-suffix="+">0</span>
+        <span class="metric-label">Happy Clients</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-num rating-num" data-target="4.8" data-suffix="★">0.0★</span>
+        <span class="metric-label">Avg. Client Rating</span>
+      </div>
+      <div class="metric-card">
+        <span class="metric-num" data-target="100" data-suffix="%">0</span>
+        <span class="metric-label">White-Hat Methods</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Article / Insights -->
+<section id="article">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Insights</span>
+      <div class="section-line"></div>
+      <span class="section-num">07</span>
+    </div>
+
+    <div class="article-container">
+      <div class="article-content reveal">
+        <div class="article-kicker">Original Perspective · SEO Strategy</div>
+        <h2 class="article-title">Why Invisible SEO Work Is the Most Honest Kind</h2>
+        <div class="article-body">
+          <p>There's a paradox at the heart of white-label SEO: the better you are at it, the less visible you become. Your name isn't on the case study. Your face isn't in the testimonial. The client celebrates, their client celebrates — and you move quietly to the next challenge.</p>
+          <p>Junior SEOs often chase logos and screenshots. They build portfolios of before-and-after traffic graphs, arrange case studies like trophies. But here's what they haven't learned yet: <strong>the most sophisticated SEO work leaves no fingerprints because it's been absorbed into something real.</strong></p>
+          <p>When you rank a local dentist's website for competitive keywords in a saturated market, you don't get credit — but a family business thrives. When you optimize an e-commerce store's product pages and cart abandonment drops while conversions climb, that's not a screenshot in your portfolio — it's a livelihood you helped sustain.</p>
+          <p>The invisible work is the honest work. No personal brand amplification. No vanity case studies. Just genuine, compounding value delivered to real businesses across real markets — and the quiet confidence of knowing exactly what you're capable of because the results proved it, even if only you know they did.</p>
+          <p>For junior SEOs reading this: <strong>stop waiting to build the perfect portfolio. Build the perfect process.</strong> Be the person who delivers quietly, consistently, and brilliantly. The opportunities will find you — because people who get results don't stay invisible forever.</p>
+        </div>
+      </div>
+
+      <div class="article-sidebar reveal">
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">SEO Signal Health</div>
+          <div class="sidebar-stat"><span class="ss-key">Content Quality</span><span class="ss-val green">Excellent</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Technical Health</span><span class="ss-val green">Strong</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Link Profile</span><span class="ss-val accent">White-Hat</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Core Web Vitals</span><span class="ss-val green">Optimized</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Schema Markup</span><span class="ss-val accent">Implemented</span></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">Platforms Served</div>
+          <div class="sidebar-stat"><span class="ss-key">Amazon</span><span class="ss-val">E-Commerce</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Flipkart</span><span class="ss-val">E-Commerce</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Walmart</span><span class="ss-val">Marketplace</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Etsy</span><span class="ss-val">Marketplace</span></div>
+          <div class="sidebar-stat"><span class="ss-key">Shopify Stores</span><span class="ss-val">Multiple</span></div>
+        </div>
+        <div class="sidebar-card">
+          <div class="sidebar-card-title">SEO Quick Fact</div>
+          <p style="font-size:.78rem; line-height:1.7; color:var(--muted);">75% of users never scroll past the first page of Google. Ranking on page 2 is essentially not ranking at all. Every position climbed is revenue earned.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Notable Projects -->
+<section id="projects">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Notable Projects</span>
+      <div class="section-line"></div>
+      <span class="section-num">08</span>
+    </div>
+    <p class="reveal" style="font-family:'Fraunces',serif;font-size:1.3rem;line-height:1.6;max-width:700px;margin-bottom:3rem;font-style:italic;color:var(--muted);">Most of this work lives under NDA and other brands' names — but the impact is real, the strategy was mine, and the rankings still hold.</p>
+
+    <div class="projects-grid">
+
+      <!-- The Wine Caverns -->
+      <div class="project-card reveal">
+        <div class="project-card-top">
+          <span class="project-industry">E-Commerce · Wine Retail</span>
+          <span class="project-country">🇪🇸 🇬🇧</span>
+        </div>
+        <div class="project-difficult">🔥 High Complexity</div>
+        <h3 class="project-name">The Wine Caverns</h3>
+        <div class="project-url">thewinecaverns.com → thewinecaverns.co.uk</div>
+        <p class="project-desc">A renowned Spain and UK-based premium wine retailer with a loyal European customer base. One of the most technically demanding projects in my portfolio — the client migrated their entire Shopify store from a .com to a .co.uk domain, requiring a precise full-site migration with zero ranking loss. I handled end-to-end on-page and off-page SEO, including architecture restructuring, canonical consolidation, and redirect mapping across thousands of product URLs.</p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Full Site Migration</span>
+          <span class="project-tag highlight">Shopify</span>
+          <span class="project-tag">On-Page SEO</span>
+          <span class="project-tag">Off-Page SEO</span>
+          <span class="project-tag">Redirect Mapping</span>
+          <span class="project-tag">E-Commerce</span>
+        </div>
+        <div class="project-metrics">
+          <div class="pm-item"><div class="pm-val">Shopify</div><div class="pm-key">Platform</div></div>
+          <div class="pm-item"><div class="pm-val">ES + UK</div><div class="pm-key">Markets</div></div>
+          <div class="pm-item"><div class="pm-val">Full SEO</div><div class="pm-key">Scope</div></div>
+        </div>
+        <div class="project-note">The articles I wrote before the ChatGPT era still drive organic visitors to this day — proof that well-researched, human-crafted content has compounding value that outlasts any trend.</div>
+      </div>
+
+      <!-- Online Marketing Help / SEO Agency in Essex -->
+      <div class="project-card reveal">
+        <div class="project-card-top">
+          <span class="project-industry">Digital Agency · SEO Services</span>
+          <span class="project-country">🇬🇧</span>
+        </div>
+        <h3 class="project-name">Online Marketing Help</h3>
+        <div class="project-url">onlinemarketinghelp.co.uk · seoagencyinessex.co.uk</div>
+        <p class="project-desc">The UK-based agency I collaborated with for 3+ years as a core SEO analyst and content specialist. Beyond the main agency site, I supported their side project SEO Agency in Essex — a geo-targeted lead generation site built to capture local search demand in the Essex and wider East England market. This involved hyper-local keyword targeting, Google Business optimization, and citation building across UK directories.</p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Long-Term Partnership</span>
+          <span class="project-tag highlight">Local SEO</span>
+          <span class="project-tag">Lead Generation</span>
+          <span class="project-tag">Geo-Targeting</span>
+          <span class="project-tag">Content Strategy</span>
+          <span class="project-tag">Citation Building</span>
+        </div>
+        <div class="project-metrics">
+          <div class="pm-item"><div class="pm-val">3+ yrs</div><div class="pm-key">Duration</div></div>
+          <div class="pm-item"><div class="pm-val">UK Local</div><div class="pm-key">Focus</div></div>
+          <div class="pm-item"><div class="pm-val">2 Sites</div><div class="pm-key">Properties</div></div>
+        </div>
+      </div>
+
+      <!-- Tizzit.co -->
+      <div class="project-card reveal">
+        <div class="project-card-top">
+          <span class="project-industry">E-Commerce · Creator Economy</span>
+          <span class="project-country">🌍</span>
+        </div>
+        <h3 class="project-name">Tizzit.co</h3>
+        <div class="project-url">tizzit.co · YouTube: 40K+ Subscribers</div>
+        <p class="project-desc">A well-known Etsy seller influencer brand that helps creators build successful Etsy shops. Tizzit has built a multi-channel presence including a YouTube channel with over 40,000 subscribers and a content-driven website. My SEO contribution supported their organic discovery strategy — aligning web content with their YouTube audience's search behavior, and improving visibility for Etsy-seller-specific queries in a surprisingly competitive niche.</p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Influencer Brand</span>
+          <span class="project-tag highlight">Content SEO</span>
+          <span class="project-tag">Etsy Niche</span>
+          <span class="project-tag">YouTube Alignment</span>
+          <span class="project-tag">Audience Strategy</span>
+        </div>
+        <div class="project-metrics">
+          <div class="pm-item"><div class="pm-val">40K+</div><div class="pm-key">YT Subscribers</div></div>
+          <div class="pm-item"><div class="pm-val">Etsy</div><div class="pm-key">Niche</div></div>
+          <div class="pm-item"><div class="pm-val">Content</div><div class="pm-key">SEO Focus</div></div>
+        </div>
+      </div>
+
+      <!-- FTG Ltd -->
+      <div class="project-card reveal">
+        <div class="project-card-top">
+          <span class="project-industry">B2B · Fire &amp; Safety Engineering</span>
+          <span class="project-country">🇬🇧</span>
+        </div>
+        <h3 class="project-name">FTG Ltd</h3>
+        <div class="project-url">ftg-ltd.co.uk</div>
+        <p class="project-desc">A UK-based specialist in smoke ventilation systems and fire safety engineering — a highly technical B2B niche where trust, authority, and regulatory compliance language dominate search intent. This project was almost entirely off-page focused: building a credible, authoritative backlink profile in a niche where most competitors had stagnant, low-quality link profiles. Strategic outreach to construction, building regulations, and safety industry publications drove meaningful domain authority growth.</p>
+        <div class="project-tags">
+          <span class="project-tag highlight">Off-Page SEO</span>
+          <span class="project-tag highlight">B2B Authority</span>
+          <span class="project-tag">Smoke Ventilation</span>
+          <span class="project-tag">Link Outreach</span>
+          <span class="project-tag">Technical Niche</span>
+          <span class="project-tag">UK Construction</span>
+        </div>
+        <div class="project-metrics">
+          <div class="pm-item"><div class="pm-val">Off-Page</div><div class="pm-key">Primary Focus</div></div>
+          <div class="pm-item"><div class="pm-val">B2B</div><div class="pm-key">Sector</div></div>
+          <div class="pm-item"><div class="pm-val">UK</div><div class="pm-key">Market</div></div>
+        </div>
+      </div>
+
+      <!-- And More -->
+      <div class="project-card reveal" style="background:linear-gradient(135deg, rgba(155,89,255,.06), rgba(0,229,255,.03)); border-top: 2px solid rgba(155,89,255,.3);">
+        <div class="project-card-top">
+          <span class="project-industry" style="border-color:rgba(155,89,255,.3);color:var(--accent3);background:rgba(155,89,255,.06);">White-Label · Confidential</span>
+          <span class="project-country">🌍</span>
+        </div>
+        <h3 class="project-name" style="color:var(--accent3);">+196 More Projects</h3>
+        <div class="project-url">Various Industries · UK, US, EU, Asia</div>
+        <p class="project-desc">The majority of the 200+ projects in my portfolio live under NDAs and agency white-label agreements — covering e-commerce, SaaS, local services, healthcare, legal, and finance verticals. Every project followed the same principle: data-driven strategy, ethical execution, measurable results. The clients may be unnamed; the work was real.</p>
+        <div class="project-tags">
+          <span class="project-tag highlight" style="border-color:rgba(155,89,255,.3);color:var(--accent3);background:rgba(155,89,255,.05);">E-Commerce</span>
+          <span class="project-tag highlight" style="border-color:rgba(155,89,255,.3);color:var(--accent3);background:rgba(155,89,255,.05);">SaaS</span>
+          <span class="project-tag">Healthcare</span>
+          <span class="project-tag">Legal</span>
+          <span class="project-tag">Finance</span>
+          <span class="project-tag">Local Services</span>
+          <span class="project-tag">WordPress</span>
+          <span class="project-tag">Shopify</span>
+        </div>
+        <div class="project-metrics">
+          <div class="pm-item"><div class="pm-val" style="color:var(--accent3);">30+</div><div class="pm-key">Clients</div></div>
+          <div class="pm-item"><div class="pm-val" style="color:var(--accent3);">4</div><div class="pm-key">Countries</div></div>
+          <div class="pm-item"><div class="pm-val" style="color:var(--accent3);">NDA</div><div class="pm-key">Protected</div></div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- Inspiration Wall -->
+<section id="inspiration">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">For Junior SEOs</span>
+      <div class="section-line"></div>
+      <span class="section-num">09</span>
+    </div>
+
+    <div style="font-family:'Fraunces',serif; font-size:2rem; line-height:1.4; max-width:700px; margin-bottom:3rem;" class="reveal">
+      Things I wish someone had told me when I was starting out.
+    </div>
+
+    <div class="inspiration-grid reveal">
+      <div class="insp-card">
+        <div class="insp-icon">🔬</div>
+        <p class="insp-quote">"Stop trying to understand the algorithm. Start trying to understand the human typing the query. The algorithm is just trying to find who does that best."</p>
+        <div class="insp-attr">On Search Intent</div>
+      </div>
+      <div class="insp-card">
+        <div class="insp-icon">📚</div>
+        <p class="insp-quote">"Read the Google Quality Rater Guidelines — not because you'll be rated by them, but because they reveal what Google genuinely values: expertise, authoritativeness, trust."</p>
+        <div class="insp-attr">On Learning</div>
+      </div>
+      <div class="insp-card">
+        <div class="insp-icon">🧪</div>
+        <p class="insp-quote">"Test everything. SEO 'best practices' are hypotheses that worked in someone else's context. Your job is to discover what works in yours."</p>
+        <div class="insp-attr">On Testing</div>
+      </div>
+      <div class="insp-card">
+        <div class="insp-icon">💬</div>
+        <p class="insp-quote">"The ability to explain complex SEO concepts to a non-technical client is 10× more valuable than knowing all the technical details yourself."</p>
+        <div class="insp-attr">On Communication</div>
+      </div>
+      <div class="insp-card">
+        <div class="insp-icon">⏳</div>
+        <p class="insp-quote">"Compound interest exists in SEO. A well-optimized page from two years ago might still be your biggest asset today. Plant trees. Tend them. Be patient."</p>
+        <div class="insp-attr">On Patience</div>
+      </div>
+      <div class="insp-card">
+        <div class="insp-icon">🌍</div>
+        <p class="insp-quote">"Geography is not a barrier. Your next client might be in London, Lagos, or Los Angeles. Build skills that translate. Learn digital. Think globally."</p>
+        <div class="insp-attr">On Opportunity</div>
+      </div>
+    </div>
+
+    <div class="quote-block reveal" style="margin-top:3rem; border-left-color:var(--accent2);">
+      <p class="quote-text">"The Trinity Rule for SEO: Content, Content Strategy, and Content Value."</p>
+      <span class="quote-attr">— Md. Sakibul Hasan</span>
+    </div>
+  </div>
+</section>
+
+<!-- Languages -->
+<section id="languages-skills">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Languages & Certifications</span>
+      <div class="section-line"></div>
+      <span class="section-num">10</span>
+    </div>
+
+    <div class="lang-grid reveal">
+      <div class="lang-card">
+        <div class="lang-flags">🇧🇩</div>
+        <div class="lang-name">Bengali</div>
+        <div class="lang-level">Native Speaker</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flags">🇬🇧</div>
+        <div class="lang-name">English</div>
+        <div class="lang-level">B2 — Professional</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flags">🇮🇳</div>
+        <div class="lang-name">Hindi / Urdu</div>
+        <div class="lang-level">Conversational</div>
+      </div>
+      <div class="lang-card">
+        <div class="lang-flags">🇮🇹</div>
+        <div class="lang-name">Italian</div>
+        <div class="lang-level">A2 Certified</div>
+      </div>
+    </div>
+
+    <!-- Certifications -->
+    <div class="reveal" style="margin-bottom:3rem;">
+      <div style="font-size:.65rem; color:var(--accent); letter-spacing:.25em; text-transform:uppercase; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem;">
+        Language Certifications
+        <span style="flex:1; height:1px; background:var(--border); display:block;"></span>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge-icon">🏅</div>
+        <div class="cert-info">
+          <div class="cert-title">IELTS — International English Language Testing System</div>
+          <div class="cert-org">British Council / IDP · Cambridge Assessment English</div>
+          <span class="cert-level">B2 Upper-Intermediate · Band Score Achieved</span>
+        </div>
+        <div class="cert-year">English</div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge-icon">🏅</div>
+        <div class="cert-info">
+          <div class="cert-title">CELI A2 — Certificato di Conoscenza della Lingua Italiana</div>
+          <div class="cert-org">Università per Stranieri di Perugia · Official CEFR Certification</div>
+          <span class="cert-level">A2 Elementary · CEFR Aligned</span>
+        </div>
+        <div class="cert-year">Italian</div>
+      </div>
+
+      <div style="font-size:.65rem; color:var(--accent3); letter-spacing:.25em; text-transform:uppercase; margin-top:2.5rem; margin-bottom:1.5rem; display:flex; align-items:center; gap:1rem;">
+        Professional Certifications
+        <span style="flex:1; height:1px; background:var(--border); display:block;"></span>
+      </div>
+
+      <div class="cert-card" style="border-color:rgba(234,67,53,.2);">
+        <div class="cert-badge-icon">📊</div>
+        <div class="cert-info">
+          <div class="cert-title">Google Analytics Certification</div>
+          <div class="cert-org">Google Skillshop · Issued by Google LLC</div>
+          <span class="cert-level" style="border-color:rgba(234,67,53,.4);color:#ea4335;background:rgba(234,67,53,.06);">Google Certified · Analytics Proficiency</span>
+        </div>
+        <div class="cert-year" style="color:#ea4335;">Google</div>
+      </div>
+
+      <div class="cert-card" style="border-color:rgba(255,122,0,.2);">
+        <div class="cert-badge-icon">🎓</div>
+        <div class="cert-info">
+          <div class="cert-title">SEO Certification — SEO Fundamentals & Strategy</div>
+          <div class="cert-org">HubSpot Academy · HubSpot Inc.</div>
+          <span class="cert-level" style="border-color:rgba(255,122,0,.4);color:#ff7a00;background:rgba(255,122,0,.06);">HubSpot Certified · SEO Fundamentals & Strategy</span>
+        </div>
+        <div class="cert-year" style="color:#ff7a00;">HubSpot</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="border:1px solid var(--border); padding:3rem; background:rgba(0,229,255,.02);">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:2rem; text-align:center;">
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-size:2rem; color:var(--accent); margin-bottom:.5rem;">🌏</div>
+          <div style="font-size:.75rem; color:var(--text); margin-bottom:.3rem;">Multicultural Communicator</div>
+          <div style="font-size:.7rem; color:var(--muted);">4 languages, global mindset</div>
+        </div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-size:2rem; color:var(--accent3); margin-bottom:.5rem;">✈️</div>
+          <div style="font-size:.75rem; color:var(--text); margin-bottom:.3rem;">International Experience</div>
+          <div style="font-size:.7rem; color:var(--muted);">Bangladesh → Italy via the internet</div>
+        </div>
+        <div>
+          <div style="font-family:'Syne',sans-serif; font-size:2rem; color:var(--accent2); margin-bottom:.5rem;">📡</div>
+          <div style="font-size:.75rem; color:var(--text); margin-bottom:.3rem;">Remote-First Professional</div>
+          <div style="font-size:.7rem; color:var(--muted);">Works across timezones seamlessly</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="section-tag">Let's Connect</span>
+      <div class="section-line"></div>
+      <span class="section-num">11</span>
+    </div>
+
+    <div class="contact-grid">
+      <div class="reveal">
+        <h2 class="contact-headline">
+          Ready to rank<br>
+          <em>higher than</em><br>
+          your competitors?
+        </h2>
+        <p class="contact-desc">
+          Whether you need a full SEO audit, a long-term content strategy, or a specialist to plug into your team — let's talk about what's possible. I work with agencies, startups, and established businesses.
+        </p>
+        <div class="contact-links">
+          <a href="mailto:seo1sakib@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉</span>
+            seo1sakib@gmail.com
+          </a>
+          <a href="https://wa.me/393508908108" target="_blank" class="contact-link whatsapp">
+            <span class="contact-link-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:inline-block;vertical-align:middle;color:#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </span>
+            WhatsApp: +39 350 890 8108
+          </a>
+          <a href="#" class="contact-link">
+            <span class="contact-link-icon">📍</span>
+            Napoli, Campania, Italy — Remote Worldwide
+          </a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="avail-badge" style="margin-bottom:2rem;">
+          <span class="avail-dot"></span>
+          Available for New Projects
+        </div>
+        <div class="form-note">
+          <p style="margin-bottom:1rem;"><strong>Ideal Engagements:</strong></p>
+          <p style="margin-bottom:.8rem;">→ Monthly SEO retainers (audit → strategy → execution)</p>
+          <p style="margin-bottom:.8rem;">→ White-label SEO partnerships with agencies</p>
+          <p style="margin-bottom:.8rem;">→ One-time technical audits with actionable roadmaps</p>
+          <p style="margin-bottom:.8rem;">→ E-commerce SEO (Amazon, Shopify, WooCommerce)</p>
+          <p>→ Content strategy and niche article writing</p>
+        </div>
+        <div style="border:1px solid var(--border); padding:2rem;">
+          <div style="font-size:.65rem; color:var(--muted); letter-spacing:.2em; text-transform:uppercase; margin-bottom:1rem;">Response Time</div>
+          <div style="font-family:'Syne',sans-serif; font-size:1.8rem; color:var(--text);">Within 24 hours</div>
+          <div style="font-size:.75rem; color:var(--muted); margin-top:.5rem;">All time zones. All day. Every day.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Steve Jobs Quote -->
+<section id="jobs-quote">
+  <div class="container">
+    <div class="jobs-quote-inner reveal">
+      <div class="jobs-quote-corner tl"></div>
+      <div class="jobs-quote-corner tr"></div>
+      <div class="jobs-quote-corner bl"></div>
+      <div class="jobs-quote-corner br"></div>
+      <p class="jobs-quote-text">"The only way to do great work is to love what you do."</p>
+      <div class="jobs-quote-attr">
+        <span class="jobs-attr-line"></span>
+        <span class="jobs-attr-name">Steve Jobs</span>
+        <span class="jobs-attr-line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section id="cta-section">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <h2 class="cta-headline">
+        Your next <em>ranking milestone</em><br>starts with one conversation.
+      </h2>
+      <p class="cta-sub">Whether you're an agency seeking a white-label partner, a startup that needs to be found, or a brand ready to dominate search — I'm ready to make it happen.</p>
+      <div class="cta-buttons">
+        <a href="mailto:seo1sakib@gmail.com" class="btn-large btn-large-primary">📧 Email Me Now</a>
+        <a href="https://wa.me/393508908108" target="_blank" class="btn-large btn-wa" style="display:inline-flex;align-items:center;gap:.6rem;"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> WhatsApp Me</a>
+        <a href="#services" class="btn-large btn-large-ghost">🔍 View Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-left">
+    © 2025 Md. Sakibul Hasan · SEO Architect · Built with intent
+  </div>
+  <div class="footer-right">Naples, Italy · Global Reach</div>
+</footer>
+
+<script>
+// ── CUSTOM CURSOR ──
+const cursor = document.getElementById('cursor');
+const trail = document.getElementById('cursor-trail');
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+setInterval(() => {
+  trail.style.left = mx + 'px';
+  trail.style.top = my + 'px';
+}, 80);
+
+document.querySelectorAll('a, button, .phil-card, .fact-card, .insp-card, .lang-card, .metric-card').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '30px';
+    cursor.style.height = '30px';
+    cursor.style.background = 'rgba(0,229,255,.2)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '16px';
+    cursor.style.height = '16px';
+    cursor.style.background = 'transparent';
+  });
+});
+
+// ── SCROLL PROGRESS ──
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  document.getElementById('scroll-bar').style.width = pct + '%';
+});
+
+// ── PARTICLE SYSTEM ──
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(); }
+  reset() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - .5) * .3;
+    this.vy = (Math.random() - .5) * .3;
+    this.r = Math.random() * 1.5 + .3;
+    this.life = 0;
+    this.maxLife = 300 + Math.random() * 400;
+    this.color = Math.random() < .6 ? '0,229,255' : Math.random() < .5 ? '155,89,255' : '255,61,107';
+  }
+  update() {
+    this.x += this.vx; this.y += this.vy; this.life++;
+    if (this.life > this.maxLife || this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+  }
+  draw() {
+    const alpha = Math.sin(this.life / this.maxLife * Math.PI) * .5;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(${this.color},${alpha})`;
+    ctx.fill();
+  }
+}
+
+for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+// connection lines
+function drawConnections() {
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 100) {
+        const alpha = (1 - dist/100) * .08;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.strokeStyle = `rgba(0,229,255,${alpha})`;
+        ctx.lineWidth = .5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, W, H);
+  drawConnections();
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ── REVEAL ON SCROLL ──
+const revealEls = document.querySelectorAll('.reveal, .tl-entry');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // trigger skill bars
+      const bars = e.target.querySelectorAll('.skill-fill');
+      bars.forEach(b => {
+        b.style.width = b.dataset.width + '%';
+      });
+    }
+  });
+}, { threshold: 0.15 });
+revealEls.forEach(el => observer.observe(el));
+
+// also for skill bars in already-visible containers
+document.querySelectorAll('.skill-fill').forEach(b => {
+  const sObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => { b.style.width = b.dataset.width + '%'; }, 200);
+      }
+    });
+  }, { threshold: 0.5 });
+  sObs.observe(b);
+});
+
+// ── COUNTER ANIMATION ──
+function animateCounter(el, target, suffix = '') {
+  let current = 0;
+  const isDecimal = el.classList.contains('rating-num');
+  const step = target / 100; // Slower animation: 100 steps instead of 60
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    if (isDecimal) {
+      el.textContent = current.toFixed(1) + suffix;
+    } else {
+      el.textContent = Math.floor(current) + suffix;
+    }
+  }, 30); // Slower: 30ms instead of 24ms per frame
+}
+
+const counterEls = document.querySelectorAll('.count-num, .metric-num');
+const counterObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.animated) {
+      e.target.dataset.animated = '1';
+      const target = parseFloat(e.target.dataset.target); // Use parseFloat for decimals
+      const suffix = e.target.dataset.suffix || '';
+      animateCounter(e.target, target, suffix);
+    }
+  });
+}, { threshold: 0.5 });
+counterEls.forEach(el => counterObs.observe(el));
+
+// ── MOUSE PARALLAX ON HERO ──
+document.addEventListener('mousemove', e => {
+  const xPct = (e.clientX / window.innerWidth - .5) * 20;
+  const yPct = (e.clientY / window.innerHeight - .5) * 10;
+  const heroRing = document.querySelector('.hero-glitch');
+  if (heroRing) {
+    heroRing.style.transform = `translateY(-50%) translate(${xPct}px, ${yPct}px)`;
+  }
+});
+
+// ── GLITCH ON HOVER FOR HEADLINE ──
+const headline = document.querySelector('.hero-headline');
+if (headline) {
+  headline.addEventListener('mouseover', () => {
+    headline.style.filter = 'blur(0px)';
+  });
+}
+
+// ── ACTIVE NAV LINKS ──
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    if (window.scrollY >= sec.offsetTop - 200) current = sec.id;
+  });
+  navLinks.forEach(a => {
+    a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+  });
+});
+
+// ── CHECKLIST TAB SWITCHING ──
+function switchTab(tabId) {
+  document.querySelectorAll('.checklist-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + tabId).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ── CHECKLIST PROGRESS TRACKING ──
+const totals = { technical: 32, onpage: 28, offpage: 26, content: 24 };
+function updateProgress(panelId) {
+  const panel = document.getElementById('panel-' + panelId);
+  const total = totals[panelId];
+  const checked = panel.querySelectorAll('.cl-checkbox:checked').length;
+  const pct = Math.round((checked / total) * 100);
+  document.getElementById('count-' + panelId).textContent = checked + ' / ' + total + ' completed';
+}
+
+// Make checkboxes interactive (enable cursor)
+document.querySelectorAll('.cl-checkbox').forEach(cb => {
+  cb.style.cursor = 'pointer';
+  cb.addEventListener('click', function(e) { e.stopPropagation(); });
+});
+</script>
+</body>
+</html>
